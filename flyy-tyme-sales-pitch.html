@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLYY TYME × SADDBERRYS — Sales Pitch Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-soft: #141312;
+    --bg-card: #1a1816;
+    --text: #e8e6e1;
+    --text-muted: #9c968a;
+    --gold: #c9a557;
+    --gold-bright: #e8c97a;
+    --emerald: #2d5a47;
+    --emerald-bright: #4a8f73;
+    --berry: #6b1f3a;
+    --border: #2a2724;
+    --border-soft: #1f1d1b;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0d0c0a 0%, var(--bg) 100%);
+  }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 24px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .accent { color: var(--gold); font-style: italic; }
+  .hero .meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    margin: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero .meta .dot { color: var(--gold); margin: 0 12px; }
+
+  /* TOC */
+  .toc {
+    margin: 40px 0 0;
+    padding: 24px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+  }
+  .toc h3 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+  }
+  .toc ol { margin: 0; padding: 0 0 0 22px; columns: 2; column-gap: 32px; }
+  .toc li { margin: 0 0 8px; font-size: 14px; break-inside: avoid; }
+  .toc a { color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; transition: border 0.15s; }
+  .toc a:hover { border-bottom-color: var(--gold); }
+  @media (max-width: 600px) { .toc ol { columns: 1; } }
+
+  /* SECTIONS */
+  section { padding: 70px 0; border-bottom: 1px solid var(--border-soft); }
+  section:last-of-type { border-bottom: 0; }
+  section h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  section h2 .num {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    display: block;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  section h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 32px 0 12px;
+    color: var(--gold-bright);
+  }
+  section h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 24px 0 10px;
+  }
+  section p { margin: 0 0 18px; color: var(--text); }
+  section p.lede { font-size: 19px; color: var(--text); line-height: 1.55; max-width: 64ch; }
+  section ul, section ol { margin: 0 0 22px; padding-left: 22px; }
+  section li { margin: 0 0 10px; }
+  section strong { color: var(--gold-bright); font-weight: 600; }
+  section em { color: var(--text-muted); font-style: italic; }
+  code, .mono {
+    font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 0.9em;
+    color: var(--gold-bright);
+    border-radius: 3px;
+  }
+
+  /* DIGEST CARDS */
+  .digest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 28px 0;
+  }
+  .digest-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .digest-card.flyy { border-top: 3px solid var(--gold); }
+  .digest-card.sadd { border-top: 3px solid var(--berry); }
+  .digest-card h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .digest-card p.tag {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .digest-card p { font-size: 14px; line-height: 1.55; margin: 0; }
+  @media (max-width: 600px) { .digest-grid { grid-template-columns: 1fr; } }
+
+  /* FLAG BOXES */
+  .flag {
+    background: var(--bg-card);
+    border-left: 3px solid var(--gold);
+    padding: 22px 26px;
+    margin: 22px 0;
+  }
+  .flag .flag-label {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 8px;
+  }
+  .flag h4 {
+    font-family: var(--serif);
+    font-size: 19px;
+    margin: 0 0 10px;
+    color: var(--text);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .flag p:last-child { margin-bottom: 0; }
+
+  /* TIER CARDS */
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .tier {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier.recommended {
+    border: 1px solid var(--gold);
+    background: linear-gradient(180deg, #1f1c17 0%, var(--bg-card) 100%);
+  }
+  .tier-badge {
+    position: absolute;
+    top: -12px;
+    left: 28px;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+  }
+  .tier h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .tier .tier-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+    font-style: italic;
+  }
+  .tier .price-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .tier .price-row .price {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--gold-bright);
+  }
+  .tier .price-row .price .small { font-size: 14px; color: var(--text-muted); font-weight: 400; font-family: var(--sans); }
+  .tier h4 {
+    font-size: 11px;
+    color: var(--gold);
+    margin: 18px 0 10px;
+  }
+  .tier ul { padding-left: 0; list-style: none; margin: 0; }
+  .tier li {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-soft);
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .tier li:last-child { border-bottom: 0; }
+  .tier li .li-price {
+    color: var(--gold);
+    font-family: 'JetBrains Mono', Menlo, monospace;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  @media (max-width: 700px) { .tiers { grid-template-columns: 1fr; } }
+
+  /* PITCH SCRIPT BOX */
+  .script {
+    background: linear-gradient(135deg, #14211d 0%, #0f1815 100%);
+    border-left: 3px solid var(--emerald-bright);
+    padding: 28px 32px;
+    margin: 24px 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .script p { margin: 0 0 14px; }
+  .script p:last-child { margin-bottom: 0; }
+  .script .label {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--emerald-bright);
+    display: block;
+    margin: 0 0 14px;
+  }
+
+  /* QUESTIONS */
+  .questions { padding-left: 0; list-style: none; }
+  .questions li {
+    counter-increment: q-counter;
+    padding: 14px 0 14px 48px;
+    border-bottom: 1px solid var(--border-soft);
+    position: relative;
+    font-size: 16px;
+  }
+  .questions { counter-reset: q-counter; }
+  .questions li:before {
+    content: counter(q-counter, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 12px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--gold);
+  }
+  .questions li:last-child { border-bottom: 0; }
+
+  /* NOTE BOX */
+  .note {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    margin: 22px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .note strong { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 50px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  footer .sep { margin: 0 14px; color: var(--gold); }
+
+  /* PRINT */
+  @media print {
+    body { background: white; color: black; }
+    .toc { display: none; }
+    section { page-break-inside: avoid; padding: 30px 0; }
+    .tier, .digest-card, .flag, .script, .note { background: white !important; color: black !important; border-color: #ccc !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Sales Pitch Prep · Confidential</p>
+    <h1>FLYY TYME <span class="accent">×</span> SADDBERRYS</h1>
+    <p class="meta">Meeting <span class="dot">·</span> 2026-06-03 <span class="dot">·</span> Prepared for Coty</p>
+
+    <nav class="toc">
+      <h3>In this brief</h3>
+      <ol>
+        <li><a href="#read">What I read</a></li>
+        <li><a href="#digest">The 30-second digest</a></li>
+        <li><a href="#flags">Three things to surface</a></li>
+        <li><a href="#edge">SGEN's edge</a></li>
+        <li><a href="#tiers">Recommended tiers</a></li>
+        <li><a href="#questions">Smart questions</a></li>
+        <li><a href="#open">How to open</a></li>
+        <li><a href="#close">The close</a></li>
+        <li><a href="#assumptions">Assumptions</a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<section id="read">
+  <div class="wrap">
+    <h2><span class="num">01</span>What I read</h2>
+    <ul>
+      <li><strong>FLYY_TIME_Pitch_Deck.pdf</strong> — FLYY TIME luxury cannabis lifestyle brand. "Distinguished Hedonist," 28-45 lounge culture, lounge-not-festival positioning.</li>
+      <li><strong>flyy_tyme_saddberrys_pitch_deck.pdf</strong> — Dual-brand ecosystem: FLYY TYME (lifestyle/events) + SADDBERRYS (berry-flavor cannabis product line). Nevada launch Phase 1, multi-state planned.</li>
+    </ul>
+    <div class="note">
+      <strong>Couldn't open:</strong> <code>UNIVERSAL SPONSORSHIP GUIDE SB x FT.pdf</code> and <code>FLYY_TYME_444_Invitational_Pitch_Deck.pdf</code> — image-based PDFs my reader can't render. If key info lives there, send screenshots and I'll fold it in.
+    </div>
+  </div>
+</section>
+
+<section id="digest">
+  <div class="wrap">
+    <h2><span class="num">02</span>The 30-second client digest</h2>
+    <p class="lede">A pre-launch cannabis lifestyle brand built like a fashion label. Investor-stage. Phase 1 is Nevada. Two layered properties:</p>
+
+    <div class="digest-grid">
+      <div class="digest-card flyy">
+        <h4>FLYY TYME</h4>
+        <p class="tag">Luxury lifestyle platform</p>
+        <p>Events, members club, merch, content. Black + gold + emerald + walnut. "Lounge culture, not festival culture." Taglines: "Stay Distinguished," "For Evenings That Matter."</p>
+      </div>
+      <div class="digest-card sadd">
+        <h4>SADDBERRYS</h4>
+        <p class="tag">Signature cannabis product line</p>
+        <p>Berry-inspired strains: Strawberry Sigh, Blackberry Velvet, Blueberry Echo, Cherry Melancholy, Saddboy Reserve. Deep purple + berry red + moody midnight aesthetic.</p>
+      </div>
+    </div>
+
+    <p><strong>Signature event:</strong> FLYY TYME Invitational (Weed Olympics) with SADDBERRYS as flower sponsor.</p>
+    <p>They're <strong>raising capital</strong>, not running a small local biz. The site is part of the pitch deck now.</p>
+  </div>
+</section>
+
+<section id="flags">
+  <div class="wrap">
+    <h2><span class="num">03</span>Three things to surface — gently</h2>
+    <p>These are openings, not gotchas. Spot them. Don't lecture.</p>
+
+    <div class="flag">
+      <p class="flag-label">Flag 01</p>
+      <h4>FLYY TIME vs FLYY TYME</h4>
+      <p>The two decks spell the brand differently. <strong>FLYY TIME</strong> in the standalone deck, <strong>FLYY TYME</strong> everywhere else (including the partnership name and 444 Invitational). Ask which is locked. Whichever it is, every URL, logo, social handle has to match.</p>
+      <p><em>This is a free "you guys clearly think about the small stuff" moment for you.</em></p>
+    </div>
+
+    <div class="flag">
+      <p class="flag-label">Flag 02</p>
+      <h4>Two target audiences don't fully line up</h4>
+      <p>FLYY TIME deck says <strong>28-45</strong>, premium spirits/cigars/rooftop crowd, "Distinguished Hedonist," lounge culture. SADDBERRYS/FLYY TYME deck says <strong>21-40</strong>, fashion-conscious, music/nightlife/creative communities.</p>
+      <p>Overlapping but not the same buyer. Ask: <em>"Is FLYY TYME the elder lounge brand and SADDBERRYS the product that pulls in the younger fashion crowd? Or are you threading one audience?"</em> Their answer tells you whether to build one site or two.</p>
+    </div>
+
+    <div class="flag">
+      <p class="flag-label">Flag 03</p>
+      <h4>Cannabis + paid search reality</h4>
+      <p>Google Ads bans direct cannabis promotion. So does Meta on most placements (Instagram is more workable for lifestyle-adjacent posts that don't directly sell flower). Their growth plan needs to lean <strong>organic SEO, content, influencers, events</strong> — not paid Google search.</p>
+      <p>Worth saying out loud so they don't budget for what won't work.</p>
+    </div>
+  </div>
+</section>
+
+<section id="edge">
+  <div class="wrap">
+    <h2><span class="num">04</span>SGEN's edge for <em>this</em> client</h2>
+    <p>Lead with these. Three angles, in this order.</p>
+
+    <h3>1. Cannabis vertical experience via Dispenza</h3>
+    <p>SGEN's sister agency is a cannabis dispensary marketing shop. We've already navigated platform rules, age-gate compliance, dispensary integrations, lab-result page templates, and the "what you can and can't say in metadata" stuff. <strong>They don't need to teach us the category.</strong></p>
+
+    <h3>2. Multi-property orchestration in days, not months</h3>
+    <p>Most agencies pitch them one site. We can build the whole ecosystem on one platform (SGEN), launch coordinated, and version-control the whole thing so an update to one site doesn't break another. <strong>Same 5-day-per-package cadence.</strong></p>
+
+    <h3>3. Investor-grade build at non-agency pricing</h3>
+    <p>They're raising money. The site is part of the pitch now. We hand them a site that looks like a fashion brand's flagship for less than what most agencies charge for a landing page.</p>
+    <p><em>Quote the SGEN line:</em> "You're not buying a cheap website. You're buying ten years of agency firepower."</p>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <h2><span class="num">05</span>Two tiers — pick based on the room</h2>
+
+    <div class="tiers">
+      <div class="tier">
+        <h3>Tier A — Lean launch</h3>
+        <p class="tier-sub">For if budget is tight or they want to prove revenue before scaling.</p>
+        <div class="price-row">
+          <div class="price">~$2,500 <span class="small">build, one-time</span></div>
+          <div class="price">~$1,350<span class="small">/mo recurring</span></div>
+        </div>
+        <h4>Build (one-time)</h4>
+        <ul>
+          <li>FLYY TYME — Lead-Gen Funnel <span class="li-price">$750</span></li>
+          <li>SADDBERRYS — Ecom Starter <span class="li-price">$850</span></li>
+          <li>Tracking Setup <span class="li-price">$249</span></li>
+          <li>CRM Integration <span class="li-price">$99</span></li>
+          <li>Press Release <span class="li-price">$349</span></li>
+          <li>Logo Cleanup (if needed) <span class="li-price">$199</span></li>
+        </ul>
+        <h4>Recurring (monthly)</h4>
+        <ul>
+          <li>Organic SEO (1 stack) <span class="li-price">$449/mo</span></li>
+          <li>Content Creation — Light (4/mo) <span class="li-price">$399/mo</span></li>
+          <li>Meta Ads management <span class="li-price">$500/mo +spend</span></li>
+        </ul>
+      </div>
+
+      <div class="tier recommended">
+        <div class="tier-badge">Recommended</div>
+        <h3>Tier B — Full ecosystem</h3>
+        <p class="tier-sub">For if they want to look like the brand they're pitching to investors.</p>
+        <div class="price-row">
+          <div class="price">~$4,800 <span class="small">build, one-time</span></div>
+          <div class="price">~$2,200<span class="small">/mo recurring</span></div>
+        </div>
+        <h4>Build (one-time)</h4>
+        <ul>
+          <li>FLYY TYME — Custom <span class="li-price">from $2,500</span></li>
+          <li>SADDBERRYS — Ecom Pro <span class="li-price">$1,500</span></li>
+          <li>Tracking Setup <span class="li-price">$249</span></li>
+          <li>CRM Integration <span class="li-price">$99</span></li>
+          <li>Press Release <span class="li-price">$349</span></li>
+          <li>Order Bump + Upsell <span class="li-price">$499</span></li>
+        </ul>
+        <h4>Recurring (monthly)</h4>
+        <ul>
+          <li>Organic SEO (1 stack) <span class="li-price">$449/mo</span></li>
+          <li>Content Creation — Standard (8/mo) <span class="li-price">$749/mo</span></li>
+          <li>Meta Ads management <span class="li-price">$1,000/mo +spend</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Why Tier B is the push:</strong> they already defined 4 content pillars in their deck (Ritual Over Rush, Modern Gentleman, Elevated Evenings, Limited Drops). We can publish into those week one. Cannabis can't run Google Ads, so Meta budget matters more than usual. And investor-grade brands need investor-grade execution — Custom tier carries that weight.
+    </div>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="wrap">
+    <h2><span class="num">06</span>Smart questions to ask</h2>
+    <p>In rough order. Use them to qualify and to spec the build mid-meeting.</p>
+    <ol class="questions">
+      <li><strong>"Is it FLYY TIME or FLYY TYME?"</strong> — non-negotiable. Gets the consistency conversation going.</li>
+      <li><strong>"Are FLYY TYME and SADDBERRYS one site or two?"</strong> — drives the package recommendation.</li>
+      <li><strong>"Are you cultivating, licensing, or partnering on the flower?"</strong> — Nevada is tight; this changes what compliance pages they need.</li>
+      <li><strong>"Where are you on the Invitational — booked venue, sponsors signed, ticketing plan?"</strong> — opens the door to a funnel + event microsite upsell.</li>
+      <li><strong>"What's your current spend on the sponsorship side, and is it landing?"</strong> — opens the door to Meta Ads + content + SEO recurring.</li>
+      <li><strong>"What's your fundraise timeline?"</strong> — if they're closing in 60 days, that's the urgency. They need us to ship fast.</li>
+      <li><strong>"Who's currently building the website?"</strong> — tells you if you're displacing someone or filling a vacuum.</li>
+      <li><strong>"Have you reserved the matching domain(s)?"</strong> — sometimes the answer is no, and that's a quick value-add you handle on the spot.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="open">
+  <div class="wrap">
+    <h2><span class="num">07</span>How to open — 90 seconds</h2>
+    <p>Riff, don't read.</p>
+    <div class="script">
+      <span class="label">Your opener</span>
+      <p>"I read both pitch decks last night. You're not building a cannabis brand — you're building a fashion brand that happens to sell flower. That changes everything about how the site needs to feel. Most agencies will give you a dispensary template. That's not what you need.</p>
+      <p>Before I get into what we'd build, two things: one, I want to confirm the spelling — FLYY TIME or FLYY TYME, because I saw both in your decks. Two, are FLYY TYME and SADDBERRYS one website with sections, or two separate sites talking to each other? Your answer changes my recommendation."</p>
+    </div>
+    <p>Then <strong>shut up</strong> and let them talk. They'll fill in 80% of what you need to spec the build.</p>
+  </div>
+</section>
+
+<section id="close">
+  <div class="wrap">
+    <h2><span class="num">08</span>The close</h2>
+    <p>Don't quote a number cold. Walk them through Tier B as <em>"what I'd build for a brand at your stage."</em> Let them flinch or not, then say:</p>
+    <div class="script">
+      <span class="label">Your close</span>
+      <p>"We can phase this. Start with the FLYY TYME hub and SADDBERRYS product site — that's the investor-grade core. The Invitational event microsite and the merch + upsell layer can ship after we know the round is closing.</p>
+      <p>Let me put together a written scope this week. What's the best email?"</p>
+    </div>
+    <p><strong>Get the meeting after the meeting.</strong> Don't try to close on the spot for a Custom-tier build.</p>
+  </div>
+</section>
+
+<section id="assumptions">
+  <div class="wrap">
+    <h2><span class="num">09</span>What I'm assuming</h2>
+    <p>Correct me before tomorrow if any of these are wrong:</p>
+    <ul>
+      <li>You're the SGEN seller, not co-pitching with Dispenza</li>
+      <li>They have logo files and brand guidelines for both brands already (decks suggest yes)</li>
+      <li>They're pre-revenue / pre-launch, so this is build-then-launch, not migrate</li>
+      <li>Nevada Phase 1 = first market, so Local SEO for a dispensary location may be on the table once they're licensed</li>
+      <li>They're raising capital, so they value speed-to-investor-ready over absolute cheapest</li>
+    </ul>
+    <p>If any of those are wrong, ping me and I'll re-cut the recommendation.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    SGEN <span class="sep">·</span> Prepared 2026-06-02 <span class="sep">·</span> Internal — Coty
+  </div>
+</footer>
+
+</body>
+</html>
