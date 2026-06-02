@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGEN × FLYY TYME — Discovery Session</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-warm: #F8F8F6;
+    --bg-warm-2: #F2F1ED;
+    --text: #000000;
+    --text-near: #1A1A1A;
+    --text-soft: #242424;
+    --text-muted: #6b6b6b;
+    --border: #e8e8e8;
+    --border-soft: #f0f0f0;
+    --accent: #d51522;
+    --accent-hover: #A8101A;
+    --accent-soft: #FCE7E8;
+    --near-black: #1b1a18;
+    --text-on-dark-soft: #868279;
+    --grad: linear-gradient(to right, #780101 0%, #e80000 50%, #a30000 100%);
+    --shadow-xl: 0 20px 50px rgba(0,0,0,0.08);
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-near);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @media (max-width: 760px) { html { scroll-snap-type: none; } }
+
+  .slide {
+    min-height: 100vh;
+    padding: 80px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+    position: relative;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .slide.warm { background: var(--bg-warm); }
+  .slide-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+  @media (max-width: 760px) {
+    .slide { min-height: auto; padding: 60px 24px; }
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  @media (max-width: 760px) { .slide-num { top: 20px; right: 24px; } }
+
+  /* brand mark */
+  .brandmark {
+    position: absolute;
+    top: 28px;
+    left: 40px;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brandmark em { font-style: normal; color: var(--accent); }
+  @media (max-width: 760px) { .brandmark { top: 18px; left: 24px; font-size: 18px; } }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 24px;
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: 1.02;
+    margin: 0 0 32px;
+    letter-spacing: -0.03em;
+  }
+  h1 .accent,
+  h2 .accent,
+  .quote-block .accent {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  h1 .x {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin: 0 14px;
+  }
+  h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(30px, 4.6vw, 48px);
+    line-height: 1.08;
+    margin: 0 0 24px;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: var(--text-near);
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.5;
+    color: var(--text-soft);
+    max-width: 62ch;
+    margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .lede.muted { color: var(--text-muted); }
+  p { margin: 0 0 14px; color: var(--text-soft); max-width: 64ch; }
+  p strong { color: var(--text); font-weight: 700; }
+  em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  /* COVER */
+  .cover { background: var(--bg); }
+  .cover .mark {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 48px;
+  }
+  .cover h1 { font-size: clamp(48px, 9vw, 104px); }
+  .cover .tagline {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 28px);
+    color: var(--text-soft);
+    margin: 20px 0 48px;
+    max-width: 44ch;
+    line-height: 1.4;
+  }
+  .cover .meta {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .cover .meta .sep { color: var(--accent); margin: 0 14px; }
+
+  /* QUOTE SLIDE */
+  .quote-slide { background: var(--near-black); }
+  .quote-slide .eyebrow { color: #ff5762; }
+  .quote-slide h2 { color: #fff; }
+  .quote-slide .lede, .quote-slide p { color: #cfcbc4; }
+  .quote-slide .quote-block { color: #fff; }
+  .quote-slide .zone { border-top-color: #322f2b; }
+  .quote-slide .zone-body { border-left-color: #322f2b; }
+  .quote-slide .zone h3 { color: #fff; }
+  .quote-slide .zone p { color: var(--text-on-dark-soft); }
+  .quote-slide .qlist li { color: #ece9e2; border-bottom-color: #2a2724; }
+  .quote-slide .qlist li:before { color: #ff5762; }
+  .quote-block {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    max-width: 30ch;
+    margin: 0 0 28px;
+  }
+
+  /* HOMEWORK */
+  .homework {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 28px 0 0;
+  }
+  .homework-item {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-size: 15px;
+  }
+  .homework-item .src {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 0 8px;
+  }
+  .homework-item .phrase {
+    color: var(--text-near);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+  }
+  @media (max-width: 760px) { .homework { grid-template-columns: 1fr; } }
+
+  /* SIDE-BY-SIDE */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 32px 0 0;
+  }
+  .pair-card {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .pair-card.sgen { border-top: 3px solid var(--accent); }
+  .pair-card.flyy { border-top: 3px solid var(--near-black); }
+  .pair-card .pair-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .pair-card h3 {
+    font-size: 22px;
+    margin: 0 0 16px;
+    color: var(--text);
+  }
+  .pair-card ul { padding: 0; margin: 0; list-style: none; }
+  .pair-card li {
+    padding: 12px 0;
+    font-size: 15px;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--border);
+  }
+  .pair-card li:last-child { border-bottom: 0; }
+  .pair-card li strong { color: var(--text); font-weight: 700; display: block; margin-bottom: 2px; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+
+  /* OVERLAP ZONE */
+  .overlap { margin: 32px 0 0; }
+  .zone {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 0;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .zone:first-child { border-top: 0; padding-top: 0; }
+  .zone-num {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 16px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+  }
+  .zone-body { padding-left: 18px; border-left: 1px solid var(--border); }
+  .zone h3 { font-size: 19px; color: var(--text); margin: 0 0 6px; }
+  .zone p { margin: 0; font-size: 15px; }
+
+  /* QUESTION LISTS */
+  .qlist {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    counter-reset: q-c;
+  }
+  .qlist li {
+    counter-increment: q-c;
+    padding: 14px 0 14px 52px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: 16px;
+    color: var(--text-near);
+    line-height: 1.5;
+  }
+  .qlist li:before {
+    content: counter(q-c, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 13px;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  .qlist li:last-child { border-bottom: 0; }
+  .qlist li .why {
+    display: block;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* PATHS */
+  .paths {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 32px 0 0;
+  }
+  .path {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px;
+  }
+  .path .p-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .path h3 {
+    font-size: 19px;
+    color: var(--text);
+    margin: 0 0 10px;
+  }
+  .path p { font-size: 14px; margin: 0; }
+  @media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+
+  /* OUTCOME */
+  .outcome-list {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+  }
+  .outcome-list li {
+    padding: 16px 0 16px 38px;
+    border-bottom: 1px solid #2a2724;
+    font-size: 17px;
+    color: #fff;
+    position: relative;
+  }
+  .outcome-list li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 23px;
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to right, #ff5762, #e80000);
+  }
+  .outcome-list li:last-child { border-bottom: 0; }
+
+  /* CLOSE */
+  .close-slide { background: var(--near-black); }
+  .close-slide .eyebrow { color: #ff5762; }
+  .close-slide h2 { color: #fff; }
+  .close-slide h2 .accent {
+    background: linear-gradient(to right, #ff5762 0%, #e80000 45%, #ff7d84 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* RIBBON */
+  .ribbon {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-xl);
+    pointer-events: none;
+  }
+  @media (max-width: 760px) { .ribbon { display: none; } }
+
+  @media print {
+    html, body { background: white; color: black; scroll-snap-type: none; overflow: visible; }
+    .slide { min-height: auto; page-break-after: always; border: 0; padding: 50px 40px; }
+    .quote-slide, .close-slide { background: white !important; }
+    .quote-slide h2, .quote-slide .quote-block, .quote-slide .zone h3, .close-slide h2, .outcome-list li { color: black !important; }
+    .ribbon { display: none; }
+    .pair-card, .homework-item, .path { background: white !important; border-color: #ccc !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 01 — COVER -->
+<section class="slide cover">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">01 / 10</span>
+  <div class="slide-inner">
+    <p class="mark">A working session</p>
+    <h1>SGEN <span class="x">×</span> <span class="accent">FLYY TYME</span></h1>
+    <p class="tagline">Finding the fit. Together.</p>
+    <p class="meta">Discovery<span class="sep">·</span>2026-06-03</p>
+  </div>
+</section>
+
+<!-- SLIDE 02 — INTENT -->
+<section class="slide quote-slide">
+  <span class="slide-num">02 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What today is</p>
+    <p class="quote-block">This isn't a pitch. <span class="accent">It's a working session.</span></p>
+    <p class="lede muted">We both have things to figure out: does the fit work, where does it click, and what would a real partnership look like — for both sides, not just one.</p>
+    <p class="lede muted">The goal today is alignment. If it's there, we move. If it isn't, we both leave smarter.</p>
+  </div>
+</section>
+
+<!-- SLIDE 03 — WHAT WE READ -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">03 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What we read before today</p>
+    <h2>We went through both decks. <span class="accent">A few things we noticed.</span></h2>
+
+    <div class="homework">
+      <div class="homework-item">
+        <span class="src">Tone of voice</span>
+        <span class="phrase">"Time is not spent. It is savored."</span>
+      </div>
+      <div class="homework-item">
+        <span class="src">Brand archetype</span>
+        <span class="phrase">The Distinguished Hedonist.</span>
+      </div>
+      <div class="homework-item">
+        <span class="src">SADDBERRYS strain lineup</span>
+        <span class="phrase">Strawberry Sigh. Blackberry Velvet. Saddboy Reserve.</span>
+      </div>
+      <div class="homework-item">
+        <span class="src">Content pillars</span>
+        <span class="phrase">Ritual Over Rush. Elevated Evenings. Limited Drops.</span>
+      </div>
+      <div class="homework-item">
+        <span class="src">Signature event</span>
+        <span class="phrase">The FLYY TYME Invitational.</span>
+      </div>
+      <div class="homework-item">
+        <span class="src">Phase 1</span>
+        <span class="phrase">Nevada. Then everywhere.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 04 — WHAT EACH SIDE BRINGS -->
+<section class="slide warm">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">04 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What each side brings</p>
+    <h2>Mutual fit only works if <span class="accent">both columns are real.</span></h2>
+
+    <div class="pair">
+      <div class="pair-card sgen">
+        <p class="pair-label">SGEN brings</p>
+        <h3>Execution + vertical chops</h3>
+        <ul>
+          <li><strong>Cannabis fluency</strong>Our sister agency, Dispenza, runs dispensary marketing daily.</li>
+          <li><strong>Own platform</strong>SGEN — seven years of in-house build, version-controlled.</li>
+          <li><strong>Marketing + web under one roof</strong>SEO, content, ads, sites — no vendor stack.</li>
+          <li><strong>Speed</strong>Five days per build, not five months.</li>
+          <li><strong>Track record</strong>1,000+ client sites, $1B+/yr in portfolio revenue managed.</li>
+        </ul>
+      </div>
+      <div class="pair-card flyy">
+        <p class="pair-label">FLYY TYME brings</p>
+        <h3>Category-defining brand + community</h3>
+        <ul>
+          <li><strong>A real brand world</strong>Most cannabis clients can't articulate this. You can.</li>
+          <li><strong>An event property</strong>The Invitational is a real partnership surface.</li>
+          <li><strong>Cultural reach</strong>Fashion-adjacent, music, creative networks.</li>
+          <li><strong>A multi-phase roadmap</strong>Recurring engagement, not a one-off.</li>
+          <li><strong>Portfolio prestige</strong>Premium cannabis lifestyle is a category we want to own.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 05 — WHERE IT MIGHT CLICK -->
+<section class="slide quote-slide">
+  <span class="slide-num">05 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">Where it might click</p>
+    <h2>Four overlap zones we'd want to <span class="accent">explore together.</span></h2>
+
+    <div class="overlap">
+      <div class="zone">
+        <p class="zone-num">01</p>
+        <div class="zone-body">
+          <h3>Website + platform</h3>
+          <p>You're mid-build. We build sites in days, not months, and run the platform underneath. Worth comparing what you have to what we'd ship — no commitment.</p>
+        </div>
+      </div>
+
+      <div class="zone">
+        <p class="zone-num">02</p>
+        <div class="zone-body">
+          <h3>Cannabis-aware marketing</h3>
+          <p>Organic SEO, content, Meta ads — the channels open to cannabis. We've run all three for dispensaries through Dispenza. You get a team that already knows what's legal and what works.</p>
+        </div>
+      </div>
+
+      <div class="zone">
+        <p class="zone-num">03</p>
+        <div class="zone-body">
+          <h3>The Invitational</h3>
+          <p>Open question: is there a partnership angle here? Sponsorship, build-out of the event microsite, co-marketing around the event. Worth a conversation.</p>
+        </div>
+      </div>
+
+      <div class="zone">
+        <p class="zone-num">04</p>
+        <div class="zone-body">
+          <h3>Cross-pollination</h3>
+          <p>Your network of brand operators, our network of dispensary operators. Referrals run both directions naturally if the work is good.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 06 — QUESTIONS FOR YOU -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">06 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What we want to learn from you</p>
+    <h2>The questions <span class="accent">we'd love your read on.</span></h2>
+
+    <ol class="qlist">
+      <li>Where's the website build today — who's doing it, how far along, what's working, what isn't?
+        <span class="why">Tells us whether we're augmenting, displacing, or starting clean.</span>
+      </li>
+      <li>One site or two? FLYY TYME and SADDBERRYS under one roof, or separate properties?
+        <span class="why">Drives architecture and changes everything downstream.</span>
+      </li>
+      <li>Where are you on cultivation and licensing in Nevada?
+        <span class="why">Determines what compliance and dispensary work makes sense to scope in.</span>
+      </li>
+      <li>What does Phase 1 actually look like — first sale, first event, first investor close?
+        <span class="why">Sets the urgency and the success markers.</span>
+      </li>
+      <li>What's the biggest thing blocking you right now?
+        <span class="why">Sometimes the answer is design, sometimes traffic, sometimes capital, sometimes a person.</span>
+      </li>
+      <li>If we partnered, what would month 6 feel like for it to have been worth doing?
+        <span class="why">Aligns us on what we're actually building toward.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- SLIDE 07 — QUESTIONS YOU SHOULD ASK US -->
+<section class="slide warm">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">07 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What you should ask us</p>
+    <h2>Fair's fair. <span class="accent">Put us on the spot.</span></h2>
+    <p class="lede muted">If we're going to work together, you should pressure-test us. Here are the questions we'd want you to ask, and we'll answer them straight.</p>
+
+    <ol class="qlist">
+      <li>What does a typical engagement actually look like — kickoff, build, handoff, ongoing?</li>
+      <li>Who specifically would be on our account, and how often do we talk to them?</li>
+      <li>Show us cannabis work you've shipped, and the results.</li>
+      <li>What happens if it doesn't go well — what's your out-clause, what's ours?</li>
+      <li>Why your platform over the one we're already on?</li>
+      <li>What does this actually cost — all-in, ranges, no surprises?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- SLIDE 08 — POSSIBLE PATHS -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">08 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">Where this could go</p>
+    <h2>Three reasonable paths. <span class="accent">No wrong answer.</span></h2>
+
+    <div class="paths">
+      <div class="path">
+        <p class="p-label">Path 01 · Lean pilot</p>
+        <h3>One property first</h3>
+        <p>We build SADDBERRYS (or FLYY TYME) as a focused first project. You see how we work. If it lands, we expand from there.</p>
+      </div>
+      <div class="path">
+        <p class="p-label">Path 02 · Full ecosystem</p>
+        <h3>Both brands, coordinated</h3>
+        <p>FLYY TYME hub + SADDBERRYS store built in parallel on one platform. Marketing layered on top. The investor-ready, in-the-market version.</p>
+      </div>
+      <div class="path">
+        <p class="p-label">Path 03 · Partnership</p>
+        <h3>Build + event + co-marketing</h3>
+        <p>Everything in Path 02 plus deeper Invitational involvement, joint case studies, shared upside. The longest horizon, biggest leverage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 09 — DISCUSSION TOPICS -->
+<section class="slide quote-slide">
+  <span class="slide-num">09 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">Suggested agenda for today</p>
+    <h2>If we get through these, <span class="accent">it was a good hour.</span></h2>
+
+    <ol class="qlist">
+      <li>Brand alignment — confirm who you are vs. what the site needs to be</li>
+      <li>Current state of the website build — what exists, what's missing</li>
+      <li>One site or two — the architecture decision</li>
+      <li>Cannabis compliance reality — what's allowed, what isn't</li>
+      <li>Phase 1 timeline + Nevada launch logistics</li>
+      <li>The Invitational — partnership opportunity, yes or no</li>
+      <li>Budget reality and decision-making — who signs off, when</li>
+      <li>Mutual referrals and network — is there cross-value beyond the engagement</li>
+    </ol>
+  </div>
+</section>
+
+<!-- SLIDE 10 — WHAT WE BOTH WALK OUT WITH -->
+<section class="slide close-slide">
+  <span class="slide-num">10 / 10</span>
+  <div class="slide-inner">
+    <p class="eyebrow">What we both walk out with</p>
+    <h2>Productive outcomes. <span class="accent">However it goes.</span></h2>
+
+    <ul class="outcome-list">
+      <li>A clear read on whether this is a fit, both sides</li>
+      <li>If yes — alignment on which path (lean pilot, full ecosystem, or partnership)</li>
+      <li>From us, a written scope and quote within 48 hours, no surprises</li>
+      <li>From you, a clear answer on architecture and timeline</li>
+      <li>Either way, we both leave with a sharper picture and zero pressure</li>
+    </ul>
+  </div>
+</section>
+
+<div class="ribbon">SGEN × FLYY TYME · Working session · 2026-06-03</div>
+
+</body>
+</html>
