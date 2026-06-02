@@ -200,6 +200,76 @@
     margin: 0 0 28px;
   }
 
+  /* SUCCESS STAT STRIP */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 32px 0 0;
+    box-shadow: var(--shadow-xl);
+  }
+  .stat { background: var(--bg); padding: 26px 22px; position: relative; }
+  .stat::before {
+    content: "";
+    display: block;
+    width: 26px; height: 3px;
+    border-radius: 2px;
+    background: var(--grad);
+    margin: 0 0 14px;
+  }
+  .stat .num {
+    font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    display: inline-block;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .stat .lbl { font-size: 13px; font-weight: 500; color: var(--text-soft); margin: 10px 0 0; line-height: 1.4; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* FIRM ROWS */
+  .firms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 22px 0 0;
+  }
+  .firm {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .firm-name {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .firm-dom {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+  .firm p { font-size: 14px; margin: 0; color: var(--text-soft); }
+  @media (max-width: 760px) { .firms { grid-template-columns: 1fr; } }
+
   /* HOMEWORK */
   .homework {
     display: grid;
@@ -420,8 +490,9 @@
     .slide { min-height: auto; page-break-after: always; border: 0; padding: 50px 40px; }
     .quote-slide, .close-slide { background: white !important; }
     .quote-slide h2, .quote-slide .quote-block, .quote-slide .zone h3, .close-slide h2, .outcome-list li { color: black !important; }
+    .outcome-list li:before { background: #d51522 !important; }
     .ribbon { display: none; }
-    .pair-card, .homework-item, .path { background: white !important; border-color: #ccc !important; }
+    .pair-card, .homework-item, .path, .firm, .stat { background: white !important; border-color: #ccc !important; }
   }
 </style>
 </head>
@@ -430,7 +501,7 @@
 <!-- SLIDE 01 — COVER -->
 <section class="slide cover">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">01 / 10</span>
+  <span class="slide-num">01 / 11</span>
   <div class="slide-inner">
     <p class="mark">A working session</p>
     <h1>SGEN <span class="x">×</span> <span class="accent">FLYY TYME</span></h1>
@@ -441,7 +512,7 @@
 
 <!-- SLIDE 02 — INTENT -->
 <section class="slide quote-slide">
-  <span class="slide-num">02 / 10</span>
+  <span class="slide-num">02 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What today is</p>
     <p class="quote-block">This isn't a pitch. <span class="accent">It's a working session.</span></p>
@@ -450,10 +521,42 @@
   </div>
 </section>
 
-<!-- SLIDE 03 — WHAT WE READ -->
+<!-- SLIDE 03 — WHO WE ARE -->
+<section class="slide warm">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">03 / 11</span>
+  <div class="slide-inner">
+    <p class="eyebrow">Who we are</p>
+    <h2>One family. Three agencies. <span class="accent">One platform underneath.</span></h2>
+
+    <div class="stats">
+      <div class="stat"><div class="num">$1.2B</div><p class="lbl">In client sales influenced</p></div>
+      <div class="stat"><div class="num">2.1B</div><p class="lbl">Website visits generated</p></div>
+      <div class="stat"><div class="num">3.8B</div><p class="lbl">Google impressions</p></div>
+      <div class="stat"><div class="num">500+</div><p class="lbl">Locations marketed</p></div>
+    </div>
+
+    <div class="firms">
+      <div class="firm">
+        <div class="firm-name">SGEN<span class="firm-dom">sgen.com</span></div>
+        <p>Our in-house platform — a from-scratch alternative to WordPress. 1,000+ sites built by hand, version-controlled and server-first. The engine every build runs on.</p>
+      </div>
+      <div class="firm">
+        <div class="firm-name">Dispenza<span class="firm-dom">dispenza.com</span></div>
+        <p>The #1 marketing agency in cannabis, since 2012. 500+ dispensary locations, with documented sales lifts from 51% to 733%.</p>
+      </div>
+      <div class="firm">
+        <div class="firm-name">MediMarketing<span class="firm-dom">medimarketing.com</span></div>
+        <p>Patient acquisition for medical practices, plus the Medi AI receptionist. Dental, med spas, optometry, urgent care and more — ROI guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 04 — WHAT WE READ -->
 <section class="slide">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">03 / 10</span>
+  <span class="slide-num">04 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What we read before today</p>
     <h2>We went through both decks. <span class="accent">A few things we noticed.</span></h2>
@@ -487,10 +590,10 @@
   </div>
 </section>
 
-<!-- SLIDE 04 — WHAT EACH SIDE BRINGS -->
+<!-- SLIDE 05 — WHAT EACH SIDE BRINGS -->
 <section class="slide warm">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">04 / 10</span>
+  <span class="slide-num">05 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What each side brings</p>
     <h2>Mutual fit only works if <span class="accent">both columns are real.</span></h2>
@@ -522,9 +625,9 @@
   </div>
 </section>
 
-<!-- SLIDE 05 — WHERE IT MIGHT CLICK -->
+<!-- SLIDE 06 — WHERE IT MIGHT CLICK -->
 <section class="slide quote-slide">
-  <span class="slide-num">05 / 10</span>
+  <span class="slide-num">06 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">Where it might click</p>
     <h2>Four overlap zones we'd want to <span class="accent">explore together.</span></h2>
@@ -565,10 +668,10 @@
   </div>
 </section>
 
-<!-- SLIDE 06 — QUESTIONS FOR YOU -->
+<!-- SLIDE 07 — QUESTIONS FOR YOU -->
 <section class="slide">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">06 / 10</span>
+  <span class="slide-num">07 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What we want to learn from you</p>
     <h2>The questions <span class="accent">we'd love your read on.</span></h2>
@@ -596,10 +699,10 @@
   </div>
 </section>
 
-<!-- SLIDE 07 — QUESTIONS YOU SHOULD ASK US -->
+<!-- SLIDE 08 — QUESTIONS YOU SHOULD ASK US -->
 <section class="slide warm">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">07 / 10</span>
+  <span class="slide-num">08 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What you should ask us</p>
     <h2>Fair's fair. <span class="accent">Put us on the spot.</span></h2>
@@ -616,10 +719,10 @@
   </div>
 </section>
 
-<!-- SLIDE 08 — POSSIBLE PATHS -->
+<!-- SLIDE 09 — POSSIBLE PATHS -->
 <section class="slide">
   <span class="brandmark">S<em>G</em>EN</span>
-  <span class="slide-num">08 / 10</span>
+  <span class="slide-num">09 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">Where this could go</p>
     <h2>Three reasonable paths. <span class="accent">No wrong answer.</span></h2>
@@ -644,9 +747,9 @@
   </div>
 </section>
 
-<!-- SLIDE 09 — DISCUSSION TOPICS -->
+<!-- SLIDE 10 — DISCUSSION TOPICS -->
 <section class="slide quote-slide">
-  <span class="slide-num">09 / 10</span>
+  <span class="slide-num">10 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">Suggested agenda for today</p>
     <h2>If we get through these, <span class="accent">it was a good hour.</span></h2>
@@ -664,9 +767,9 @@
   </div>
 </section>
 
-<!-- SLIDE 10 — WHAT WE BOTH WALK OUT WITH -->
+<!-- SLIDE 11 — WHAT WE BOTH WALK OUT WITH -->
 <section class="slide close-slide">
-  <span class="slide-num">10 / 10</span>
+  <span class="slide-num">11 / 11</span>
   <div class="slide-inner">
     <p class="eyebrow">What we both walk out with</p>
     <h2>Productive outcomes. <span class="accent">However it goes.</span></h2>
