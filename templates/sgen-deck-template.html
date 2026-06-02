@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ============================================================
+  SGEN DECK TEMPLATE  ·  the standard for all SGen decks
+  ============================================================
+  HOW TO USE:
+  1. Copy this file to the repo root, rename to your-deck-name.html
+  2. Fill in the COVER (slide 01) — eyebrow, title, tagline, date.
+  3. Leave "Who we are" (slide 02) as-is — it's standard on every deck.
+  4. Build your content slides from the COMPONENT PALETTE below
+     (homework grid, comparison pair, numbered zones, question list,
+      3-up paths, dark quote slide, dark close slide).
+  5. Renumber every .slide-num as NN / TOTAL.
+  6. Add a card for it in index.html.
+  7. Double-click Publish-Decks.bat to publish.
+
+  BRAND (do not change): white bg, Inter + JetBrains Mono,
+  red accent #d51522 with gradient #780101 -> #e80000 -> #a30000,
+  near-black dark slides #1b1a18, SGEN logo mark = S<em>G</em>EN.
+  ============================================================
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGEN × [CLIENT] — [Subtitle]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-warm: #F8F8F6;
+    --bg-warm-2: #F2F1ED;
+    --text: #000000;
+    --text-near: #1A1A1A;
+    --text-soft: #242424;
+    --text-muted: #6b6b6b;
+    --border: #e8e8e8;
+    --border-soft: #f0f0f0;
+    --accent: #d51522;
+    --accent-hover: #A8101A;
+    --accent-soft: #FCE7E8;
+    --near-black: #1b1a18;
+    --text-on-dark-soft: #868279;
+    --grad: linear-gradient(to right, #780101 0%, #e80000 50%, #a30000 100%);
+    --shadow-xl: 0 20px 50px rgba(0,0,0,0.08);
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-near);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @media (max-width: 760px) { html { scroll-snap-type: none; } }
+
+  .slide {
+    min-height: 100vh;
+    padding: 80px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+    position: relative;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .slide.warm { background: var(--bg-warm); }
+  .slide-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+  @media (max-width: 760px) {
+    .slide { min-height: auto; padding: 60px 24px; }
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  @media (max-width: 760px) { .slide-num { top: 20px; right: 24px; } }
+
+  .brandmark {
+    position: absolute;
+    top: 28px;
+    left: 40px;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brandmark em { font-style: normal; color: var(--accent); }
+  @media (max-width: 760px) { .brandmark { top: 18px; left: 24px; font-size: 18px; } }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 24px;
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: 1.02;
+    margin: 0 0 32px;
+    letter-spacing: -0.03em;
+  }
+  h1 .accent,
+  h2 .accent,
+  .quote-block .accent {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  h1 .x {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin: 0 14px;
+  }
+  h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(30px, 4.6vw, 48px);
+    line-height: 1.08;
+    margin: 0 0 24px;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: var(--text-near);
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.5;
+    color: var(--text-soft);
+    max-width: 62ch;
+    margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .lede.muted { color: var(--text-muted); }
+  p { margin: 0 0 14px; color: var(--text-soft); max-width: 64ch; }
+  p strong { color: var(--text); font-weight: 700; }
+  em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  /* COVER */
+  .cover { background: var(--bg); }
+  .cover .mark {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 48px;
+  }
+  .cover h1 { font-size: clamp(48px, 9vw, 104px); }
+  .cover .tagline {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 28px);
+    color: var(--text-soft);
+    margin: 20px 0 48px;
+    max-width: 44ch;
+    line-height: 1.4;
+  }
+  .cover .meta {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .cover .meta .sep { color: var(--accent); margin: 0 14px; }
+
+  /* QUOTE / DARK SLIDE */
+  .quote-slide { background: var(--near-black); }
+  .quote-slide .eyebrow { color: #ff5762; }
+  .quote-slide h2 { color: #fff; }
+  .quote-slide .lede, .quote-slide p { color: #cfcbc4; }
+  .quote-slide .quote-block { color: #fff; }
+  .quote-slide .zone { border-top-color: #322f2b; }
+  .quote-slide .zone-body { border-left-color: #322f2b; }
+  .quote-slide .zone h3 { color: #fff; }
+  .quote-slide .zone p { color: var(--text-on-dark-soft); }
+  .quote-slide .qlist li { color: #ece9e2; border-bottom-color: #2a2724; }
+  .quote-slide .qlist li:before { color: #ff5762; }
+  .quote-block {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    max-width: 30ch;
+    margin: 0 0 28px;
+  }
+
+  /* SUCCESS STAT STRIP */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 32px 0 0;
+    box-shadow: var(--shadow-xl);
+  }
+  .stat { background: var(--bg); padding: 26px 22px; position: relative; }
+  .stat::before {
+    content: "";
+    display: block;
+    width: 26px; height: 3px;
+    border-radius: 2px;
+    background: var(--grad);
+    margin: 0 0 14px;
+  }
+  .stat .num {
+    font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    display: inline-block;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .stat .lbl { font-size: 13px; font-weight: 500; color: var(--text-soft); margin: 10px 0 0; line-height: 1.4; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* FIRM ROWS */
+  .firms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 22px 0 0;
+  }
+  .firm {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .firm-name {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .firm-dom {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+  .firm p { font-size: 14px; margin: 0; color: var(--text-soft); }
+  @media (max-width: 760px) { .firms { grid-template-columns: 1fr; } }
+
+  /* HOMEWORK / FACT GRID */
+  .homework {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 28px 0 0;
+  }
+  .homework-item {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-size: 15px;
+  }
+  .homework-item .src {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 0 8px;
+  }
+  .homework-item .phrase {
+    color: var(--text-near);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+  }
+  @media (max-width: 760px) { .homework { grid-template-columns: 1fr; } }
+
+  /* COMPARISON PAIR */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 32px 0 0;
+  }
+  .pair-card {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .pair-card.sgen { border-top: 3px solid var(--accent); }
+  .pair-card.them { border-top: 3px solid var(--near-black); }
+  .pair-card .pair-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .pair-card h3 {
+    font-size: 22px;
+    margin: 0 0 16px;
+    color: var(--text);
+  }
+  .pair-card ul { padding: 0; margin: 0; list-style: none; }
+  .pair-card li {
+    padding: 12px 0;
+    font-size: 15px;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--border);
+  }
+  .pair-card li:last-child { border-bottom: 0; }
+  .pair-card li strong { color: var(--text); font-weight: 700; display: block; margin-bottom: 2px; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+
+  /* NUMBERED ZONES */
+  .overlap { margin: 32px 0 0; }
+  .zone {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 0;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .zone:first-child { border-top: 0; padding-top: 0; }
+  .zone-num {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 16px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+  }
+  .zone-body { padding-left: 18px; border-left: 1px solid var(--border); }
+  .zone h3 { font-size: 19px; color: var(--text); margin: 0 0 6px; }
+  .zone p { margin: 0; font-size: 15px; }
+
+  /* QUESTION / NUMBERED LIST */
+  .qlist {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    counter-reset: q-c;
+  }
+  .qlist li {
+    counter-increment: q-c;
+    padding: 14px 0 14px 52px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: 16px;
+    color: var(--text-near);
+    line-height: 1.5;
+  }
+  .qlist li:before {
+    content: counter(q-c, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 13px;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  .qlist li:last-child { border-bottom: 0; }
+  .qlist li .why {
+    display: block;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* 3-UP PATHS / CARDS */
+  .paths {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 32px 0 0;
+  }
+  .path {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px;
+  }
+  .path .p-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .path h3 {
+    font-size: 19px;
+    color: var(--text);
+    margin: 0 0 10px;
+  }
+  .path p { font-size: 14px; margin: 0; }
+  @media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+
+  /* OUTCOME LIST (on dark close slide) */
+  .outcome-list {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+  }
+  .outcome-list li {
+    padding: 16px 0 16px 38px;
+    border-bottom: 1px solid #2a2724;
+    font-size: 17px;
+    color: #fff;
+    position: relative;
+  }
+  .outcome-list li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 23px;
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to right, #ff5762, #e80000);
+  }
+  .outcome-list li:last-child { border-bottom: 0; }
+
+  /* CLOSE */
+  .close-slide { background: var(--near-black); }
+  .close-slide .eyebrow { color: #ff5762; }
+  .close-slide h2 { color: #fff; }
+  .close-slide h2 .accent {
+    background: linear-gradient(to right, #ff5762 0%, #e80000 45%, #ff7d84 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* RIBBON */
+  .ribbon {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-xl);
+    pointer-events: none;
+  }
+  @media (max-width: 760px) { .ribbon { display: none; } }
+
+  @media print {
+    html, body { background: white; color: black; scroll-snap-type: none; overflow: visible; }
+    .slide { min-height: auto; page-break-after: always; border: 0; padding: 50px 40px; }
+    .quote-slide, .close-slide { background: white !important; }
+    .quote-slide h2, .quote-slide .quote-block, .quote-slide .zone h3, .close-slide h2, .outcome-list li { color: black !important; }
+    .outcome-list li:before { background: #d51522 !important; }
+    .ribbon { display: none; }
+    .pair-card, .homework-item, .path, .firm, .stat { background: white !important; border-color: #ccc !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SLIDE 01 — COVER (edit per deck) ===== -->
+<section class="slide cover">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">01 / NN</span>
+  <div class="slide-inner">
+    <p class="mark">[Eyebrow — e.g. A working session]</p>
+    <h1>SGEN <span class="x">×</span> <span class="accent">[CLIENT NAME]</span></h1>
+    <p class="tagline">[One-line tagline.]</p>
+    <p class="meta">[Context]<span class="sep">·</span>[YYYY-MM-DD]</p>
+  </div>
+</section>
+
+<!-- ===== SLIDE 02 — WHO WE ARE (STANDARD — keep on every deck) ===== -->
+<section class="slide warm">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">02 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">Who we are</p>
+    <h2>One family. Three agencies. <span class="accent">One platform underneath.</span></h2>
+
+    <div class="stats">
+      <div class="stat"><div class="num">$1.2B</div><p class="lbl">In client sales influenced</p></div>
+      <div class="stat"><div class="num">2.1B</div><p class="lbl">Website visits generated</p></div>
+      <div class="stat"><div class="num">3.8B</div><p class="lbl">Google impressions</p></div>
+      <div class="stat"><div class="num">500+</div><p class="lbl">Locations marketed</p></div>
+    </div>
+
+    <div class="firms">
+      <div class="firm">
+        <div class="firm-name">SGEN<span class="firm-dom">sgen.com</span></div>
+        <p>Our in-house platform — a from-scratch alternative to WordPress. 1,000+ sites built by hand, version-controlled and server-first. The engine every build runs on.</p>
+      </div>
+      <div class="firm">
+        <div class="firm-name">Dispenza<span class="firm-dom">dispenza.com</span></div>
+        <p>The #1 marketing agency in cannabis, since 2012. 500+ dispensary locations, with documented sales lifts from 51% to 733%.</p>
+      </div>
+      <div class="firm">
+        <div class="firm-name">MediMarketing<span class="firm-dom">medimarketing.com</span></div>
+        <p>Patient acquisition for medical practices, plus the Medi AI receptionist. Dental, med spas, optometry, urgent care and more — ROI guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPONENT PALETTE — copy a block below into a new <section> and fill in ===== -->
+
+<!-- COMPONENT: dark quote/intent slide -->
+<section class="slide quote-slide">
+  <span class="slide-num">03 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <p class="quote-block">[Big statement.] <span class="accent">[Punchline.]</span></p>
+    <p class="lede muted">[Supporting line.]</p>
+  </div>
+</section>
+
+<!-- COMPONENT: fact grid (2-col) -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">04 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Headline] <span class="accent">[accent phrase.]</span></h2>
+    <div class="homework">
+      <div class="homework-item"><span class="src">[Label]</span><span class="phrase">[Fact / quote.]</span></div>
+      <div class="homework-item"><span class="src">[Label]</span><span class="phrase">[Fact / quote.]</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENT: comparison pair (two columns) -->
+<section class="slide warm">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">05 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Headline] <span class="accent">[accent phrase.]</span></h2>
+    <div class="pair">
+      <div class="pair-card sgen">
+        <p class="pair-label">SGEN brings</p>
+        <h3>[Column title]</h3>
+        <ul>
+          <li><strong>[Point]</strong>[Detail.]</li>
+        </ul>
+      </div>
+      <div class="pair-card them">
+        <p class="pair-label">[CLIENT] brings</p>
+        <h3>[Column title]</h3>
+        <ul>
+          <li><strong>[Point]</strong>[Detail.]</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENT: numbered zones -->
+<section class="slide quote-slide">
+  <span class="slide-num">06 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Headline] <span class="accent">[accent phrase.]</span></h2>
+    <div class="overlap">
+      <div class="zone"><p class="zone-num">01</p><div class="zone-body"><h3>[Title]</h3><p>[Body.]</p></div></div>
+      <div class="zone"><p class="zone-num">02</p><div class="zone-body"><h3>[Title]</h3><p>[Body.]</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENT: numbered question list -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">07 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Headline] <span class="accent">[accent phrase.]</span></h2>
+    <ol class="qlist">
+      <li>[Question.] <span class="why">[Why it matters.]</span></li>
+      <li>[Question.] <span class="why">[Why it matters.]</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- COMPONENT: 3-up paths/cards -->
+<section class="slide">
+  <span class="brandmark">S<em>G</em>EN</span>
+  <span class="slide-num">08 / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Headline] <span class="accent">[accent phrase.]</span></h2>
+    <div class="paths">
+      <div class="path"><p class="p-label">[Label]</p><h3>[Title]</h3><p>[Body.]</p></div>
+      <div class="path"><p class="p-label">[Label]</p><h3>[Title]</h3><p>[Body.]</p></div>
+      <div class="path"><p class="p-label">[Label]</p><h3>[Title]</h3><p>[Body.]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSE SLIDE (edit per deck) ===== -->
+<section class="slide close-slide">
+  <span class="slide-num">NN / NN</span>
+  <div class="slide-inner">
+    <p class="eyebrow">[Eyebrow]</p>
+    <h2>[Closing headline.] <span class="accent">[accent phrase.]</span></h2>
+    <ul class="outcome-list">
+      <li>[Outcome.]</li>
+      <li>[Outcome.]</li>
+    </ul>
+  </div>
+</section>
+
+<div class="ribbon">SGEN × [CLIENT] · [Context] · [YYYY-MM-DD]</div>
+
+</body>
+</html>

@@ -4,55 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SGen — Shareable Decks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d12; --card:#151922; --ink:#f5f7fa; --muted:#9aa4b2; --accent:#6ea8fe; }
+    :root {
+      --bg:#FFFFFF; --bg-warm:#F8F8F6; --ink:#1A1A1A; --soft:#242424; --muted:#6b6b6b;
+      --border:#e8e8e8; --accent:#d51522;
+      --grad: linear-gradient(to right, #780101 0%, #e80000 50%, #a30000 100%);
+      --shadow-xl: 0 20px 50px rgba(0,0,0,0.08);
+      --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --mono:'JetBrains Mono',Menlo,Consolas,monospace;
+    }
     * { box-sizing: border-box; }
     body {
-      margin: 0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0; font-family: var(--sans);
       background: var(--bg); color: var(--ink); min-height: 100vh;
-      padding: 48px 20px;
+      padding: 56px 20px; -webkit-font-smoothing: antialiased;
     }
     .wrap { max-width: 760px; margin: 0 auto; }
-    header { margin-bottom: 40px; }
-    h1 { font-size: 28px; margin: 0 0 6px; letter-spacing: -0.5px; }
-    .sub { color: var(--muted); font-size: 15px; margin: 0; }
+    .logo { font-weight: 900; font-size: 22px; letter-spacing: -0.02em; margin: 0 0 40px; }
+    .logo em { font-style: normal; color: var(--accent); }
+    header { margin-bottom: 32px; }
+    .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+    h1 { font-size: 34px; font-weight: 900; margin: 0 0 8px; letter-spacing: -0.03em; }
+    .sub { color: var(--muted); font-size: 16px; margin: 0; }
     .grid { display: grid; gap: 14px; }
     a.card {
       display: block; text-decoration: none; color: inherit;
-      background: var(--card); border: 1px solid #232a36; border-radius: 12px;
-      padding: 20px 22px; transition: border-color .15s, transform .15s;
+      background: var(--bg-warm); border: 1px solid var(--border);
+      border-top: 3px solid var(--accent); border-radius: 12px;
+      padding: 22px 24px; transition: border-color .15s, transform .15s, box-shadow .15s;
     }
-    a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card .title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    a.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-xl); }
+    .card .title { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
     .card .desc { color: var(--muted); font-size: 14px; }
-    .card .go { color: var(--accent); font-size: 13px; margin-top: 10px; }
-    footer { color: var(--muted); font-size: 13px; margin-top: 48px; text-align: center; }
+    .card .go { color: var(--accent); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; margin-top: 12px; text-transform: uppercase; }
+    footer { color: var(--muted); font-size: 13px; margin-top: 48px; }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <div class="logo">S<em>G</em>EN</div>
     <header>
-      <h1>SGen — Shareable Decks</h1>
-      <p class="sub">Pitch decks and presentations, ready to view in any browser.</p>
+      <p class="eyebrow">Shareable decks</p>
+      <h1>SGen pitch decks</h1>
+      <p class="sub">Live presentations, ready to view in any browser.</p>
     </header>
 
     <div class="grid">
-      <!-- To add a new deck: copy one of these blocks, change the link, title, and description. -->
+      <!-- To add a new deck: copy this block, change the link, title, and description. -->
       <a class="card" href="flyy-tyme-sgen.html">
-        <div class="title">FLYY TYME × SGen — SGen brand</div>
-        <div class="desc">Discovery session deck, SGen brand styling (white / red).</div>
-        <div class="go">Open deck →</div>
-      </a>
-
-      <a class="card" href="flyy-tyme.html">
-        <div class="title">FLYY TYME × SGen — FLYY brand</div>
-        <div class="desc">Same deck, FLYY TYME luxury styling (dark / gold).</div>
-        <div class="go">Open deck →</div>
-      </a>
-
-      <a class="card" href="flyy-tyme-sales-pitch.html">
-        <div class="title">FLYY TYME — Sales Pitch</div>
-        <div class="desc">Sales-focused pitch deck.</div>
+        <div class="title">FLYY TYME × SGen</div>
+        <div class="desc">Discovery session deck — premium cannabis lifestyle partnership.</div>
         <div class="go">Open deck →</div>
       </a>
     </div>
