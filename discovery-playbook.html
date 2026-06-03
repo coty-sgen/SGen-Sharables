@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Discovery Playbook — SGen Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#FFFFFF; --bg-warm:#F8F8F6; --bg-warm-2:#F2F1ED;
+    --text:#000; --ink:#1A1A1A; --soft:#242424; --muted:#6b6b6b;
+    --border:#e8e8e8; --border-soft:#f0f0f0;
+    --accent:#d51522; --near-black:#1b1a18;
+    --grad:linear-gradient(to right,#780101 0%,#e80000 50%,#a30000 100%);
+    --shadow-xl:0 20px 50px rgba(0,0,0,.08);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px;}
+
+  /* header */
+  header.top{padding:64px 0 40px;border-bottom:1px solid var(--border);}
+  .brandmark{font-weight:900;font-size:22px;letter-spacing:-.02em;margin:0 0 28px;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .eyebrow{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 16px;}
+  h1{font-size:clamp(38px,6vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1.02;margin:0 0 18px;}
+  .lede{font-size:clamp(18px,2.2vw,21px);color:var(--soft);max-width:62ch;margin:0;}
+  .lede .accent{color:var(--accent);font-weight:600;}
+
+  /* sections */
+  section{padding:52px 0;border-bottom:1px solid var(--border);}
+  .sec-label{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0 0 10px;}
+  .sec-sub{color:var(--muted);font-size:16px;margin:0 0 28px;max-width:60ch;}
+  h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:30px 0 12px;}
+  p{color:var(--soft);max-width:64ch;}
+  strong{color:var(--text);font-weight:700;}
+
+  /* principle cards */
+  .principles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  .pcard{background:var(--bg-warm);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;padding:22px;}
+  .pcard h4{margin:0 0 8px;font-size:17px;font-weight:800;}
+  .pcard p{margin:0;font-size:14.5px;color:var(--soft);}
+  @media(max-width:680px){.principles{grid-template-columns:1fr;}}
+
+  /* the arc — numbered steps */
+  .arc{list-style:none;padding:0;margin:0;counter-reset:arc;}
+  .arc li{counter-increment:arc;display:grid;grid-template-columns:54px 1fr;gap:0;padding:20px 0;border-top:1px solid var(--border-soft);}
+  .arc li:first-child{border-top:0;}
+  .arc li::before{content:counter(arc,decimal-leading-zero);font-family:var(--mono);font-weight:700;font-size:16px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;padding-top:3px;}
+  .arc .body{border-left:1px solid var(--border);padding-left:18px;}
+  .arc h4{margin:0 0 4px;font-size:18px;font-weight:700;}
+  .arc p{margin:0;font-size:15px;color:var(--soft);}
+
+  /* question blocks */
+  .qcat{margin:0 0 8px;}
+  .qcat .tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--bg-warm-2);border:1px solid var(--border);border-radius:9999px;padding:4px 12px;margin:26px 0 14px;}
+  .q{border-left:3px solid var(--accent);background:var(--bg-warm);border-radius:0 10px 10px 0;padding:16px 20px;margin:0 0 12px;}
+  .q .ask{font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px;}
+  .q .why{font-size:13.5px;color:var(--muted);margin:0;font-style:italic;}
+  .q .why b{color:var(--soft);font-style:normal;}
+
+  /* callout */
+  .callout{background:var(--near-black);color:#fff;border-radius:14px;padding:26px 28px;margin:24px 0;}
+  .callout .eyebrow{color:#ff5762;}
+  .callout p{color:#d8d4cd;max-width:none;margin:0;}
+  .callout strong{color:#fff;}
+
+  /* quick ref list */
+  .quickref{list-style:none;padding:0;margin:18px 0 0;counter-reset:qr;}
+  .quickref li{counter-increment:qr;padding:13px 0 13px 46px;border-bottom:1px solid var(--border-soft);position:relative;font-size:16px;color:var(--ink);}
+  .quickref li:last-child{border-bottom:0;}
+  .quickref li::before{content:counter(qr);position:absolute;left:0;top:11px;font-family:var(--mono);font-weight:700;font-size:16px;color:var(--accent);}
+
+  footer{padding:40px 0 70px;color:var(--muted);font-size:13px;font-family:var(--mono);}
+
+  @media print{
+    body{font-size:12pt;}
+    section{padding:24px 0;page-break-inside:avoid;}
+    .callout{background:#fff!important;color:#000!important;border:1px solid #999;}
+    .callout p,.callout strong{color:#000!important;}
+    .callout .eyebrow{color:#d51522!important;}
+    .q,.pcard{background:#fff!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brandmark">S<em>G</em>EN</div>
+    <p class="eyebrow">Sales Playbook · Internal</p>
+    <h1>The Discovery Playbook</h1>
+    <p class="lede">How to walk out of any first call knowing the customer's business better than their own team does — and have them <span class="accent">wanting your business</span> by the end. Built from the calls that have closed for 12 years.</p>
+  </header>
+
+  <!-- MINDSET -->
+  <section>
+    <p class="sec-label">01 · The mindset</p>
+    <h2>You're not pitching. You're qualifying each other.</h2>
+    <p class="sec-sub">Everything below only works if you actually believe this. The posture is what makes people open up.</p>
+
+    <div class="principles">
+      <div class="pcard">
+        <h4>It's mutual qualification</h4>
+        <p>"This is about you proving we're a good fit today" — not you begging for the deal. Flip who's selling whom. Make them want your business.</p>
+      </div>
+      <div class="pcard">
+        <h4>Audit hard, say no more than yes</h4>
+        <p>You take time upfront to understand the situation and make sure it's even worth engaging. Selectivity is what makes a yes mean something.</p>
+      </div>
+      <div class="pcard">
+        <h4>Be the advisor, not the vendor</h4>
+        <p>"Whether we work together or not, here's something valuable for you." Give real homework and real diagnosis on the call. Trust compounds.</p>
+      </div>
+      <div class="pcard">
+        <h4>Honest broker at the end</h4>
+        <p>"If we're not a match, I'll tell you exactly why — with real data — and tell you what I'd do if I were in your shoes." Removes the pressure that makes people guard information.</p>
+      </div>
+    </div>
+
+    <h3>The thinking order — run every business through this</h3>
+    <p>The whole call is reverse-engineering these four, in order:</p>
+    <ol class="arc">
+      <li><div class="body"><h4>What is the sale?</h4><p>What's the actual value, and the different ways it can be presented/packaged?</p></div></li>
+      <li><div class="body"><h4>Who buys it?</h4><p>Which customer profiles, and what is each one actually buying from you?</p></div></li>
+      <li><div class="body"><h4>How &amp; where would they buy?</h4><p>Where do those people already exist so you can place an ad or rank for what they search?</p></div></li>
+      <li><div class="body"><h4>How do you make them instantly want it?</h4><p>On the page, the video, the funnel — what flips them from looking to buying?</p></div></li>
+    </ol>
+  </section>
+
+  <!-- THE ARC -->
+  <section>
+    <p class="sec-label">02 · The call arc</p>
+    <h2>The order you move through it.</h2>
+    <p class="sec-sub">Don't interrogate. Move through these phases conversationally — each one earns the right to the next.</p>
+
+    <ol class="arc">
+      <li><div class="body"><h4>Trade origin stories first</h4><p>Open with a peer-to-peer credibility exchange. Go first — share your own war story (the impossible rebuild, the $74M client) so they feel safe matching your candor. You're establishing you're a peer, not a salesperson.</p></div></li>
+      <li><div class="body"><h4>Frame the call in parts</h4><p>"Let's take this in two parts — first the specific thing, then I'll change gears and I'll have a bunch of questions." You're telling them up front you're going to dig, so the questions feel expected, not pushy.</p></div></li>
+      <li><div class="body"><h4>Dig in sequence</h4><p>Product → dream customer → hidden demand → economics → deal flow → sales machine → competitors → current marketing. (Full question bank in section 03.)</p></div></li>
+      <li><div class="body"><h4>Reframe what you heard</h4><p>Package it back into one strong conclusion in your own words. This is where you prove you understood — and surface the real problem they couldn't name.</p></div></li>
+      <li><div class="body"><h4>Close with homework + posture</h4><p>Reciprocity, the honest-broker promise, scarcity, and a concrete next step. (Section 04.)</p></div></li>
+    </ol>
+  </section>
+
+  <!-- QUESTION BANK -->
+  <section>
+    <p class="sec-label">03 · The question bank</p>
+    <h2>The actual questions.</h2>
+    <p class="sec-sub">Lead with the bolded power-question, then follow the threads. The italics tell you what each one is really for.</p>
+
+    <div class="qcat"><span class="tag">A · The dream customer</span></div>
+    <div class="q">
+      <p class="ask">"Who's your favorite customer? If you could wave a wand and they called every single time your phone rang — and it rang 10 times a day — who is that, and what are they buying from you?"</p>
+      <p class="why"><b>Why:</b> Surfaces the dream profile AND the exact product they buy. If they narrow to "our ICP," push: <i>"No — across everything you make money from, who's your favorite?"</i></p>
+    </div>
+    <div class="q">
+      <p class="ask">"If you could raise the floor and only work with companies doing $5M+ a year, who would you keep — and who would you drop?"</p>
+      <p class="why"><b>Why:</b> Reveals which segments drain energy vs. pay off, and the growth they actually want.</p>
+    </div>
+    <div class="q">
+      <p class="ask">"What names would put you on the map? Who do you have to land to feel like you're hanging with the big boys?"</p>
+      <p class="why"><b>Why:</b> Gets the aspirational logos (Tesla, NVIDIA, LVMH…) — that's your messaging and targeting north star.</p>
+    </div>
+
+    <div class="qcat"><span class="tag">B · The hidden demand (positioning)</span></div>
+    <div class="q">
+      <p class="ask">"What do people think they want, when really they need your product?"</p>
+      <p class="why"><b>Why:</b> Exposes the gap between customer language and what you actually sell — the root of every search/positioning problem. (Nobody googles "3D TV without glasses.")</p>
+    </div>
+    <div class="q">
+      <p class="ask">"What need did they have — that they didn't have an answer for — that would lead them to you?"</p>
+      <p class="why"><b>Why:</b> Finds the trigger moment and the words they use before they know you exist. <b>Technique:</b> paint the buyer's journey yourself ("someone on the innovation team says 'we need wow factor'…") and let them correct it.</p>
+    </div>
+
+    <div class="qcat"><span class="tag">C · The money</span></div>
+    <div class="q">
+      <p class="ask">"What do they think they'll spend vs. what they ultimately spend? Where's the price gap between you and the cheap option?"</p>
+      <p class="why"><b>Why:</b> Maps anchor price, real price, and where budget objections kill deals (2D vs 3D, "cut from the project").</p>
+    </div>
+    <div class="q">
+      <p class="ask">"What's your customer acquisition cost? What's a typical order — smallest, biggest?"</p>
+      <p class="why"><b>Why:</b> Tells you what they can afford to spend on marketing and how much a won deal is worth ($5–10k CAC, $30–50k orders, $1M installs).</p>
+    </div>
+    <div class="q">
+      <p class="ask">"Where do you lose — and to what?"</p>
+      <p class="why"><b>Why:</b> The honest answer (cheaper alternative, budget cut, long approval) tells you exactly what the funnel has to overcome.</p>
+    </div>
+
+    <div class="qcat"><span class="tag">D · The flow &amp; business health</span></div>
+    <div class="q">
+      <p class="ask">"What's your volume right now — orders a month, a year? How many clients last year? Best year ever? Where's the flow today?"</p>
+      <p class="why"><b>Why:</b> Gives you a visual of the trajectory — growing, flat, or fell off a cliff — and why (caught a post-website-relaunch traffic drop this way).</p>
+    </div>
+    <div class="q">
+      <p class="ask">"Walk me through your deal spectrum separately — the big slow ones vs. the small fast ones."</p>
+      <p class="why"><b>Why:</b> Big deals (6mo–2yr, marquee logos) and small deals (quick, global, low-commit) need totally different funnels. Don't let them blur together.</p>
+    </div>
+
+    <div class="qcat"><span class="tag">E · The sales machine</span></div>
+    <div class="q">
+      <p class="ask">"Do you have set packages, or is everything custom? How long to turn around a proposal, and what's your stack?"</p>
+      <p class="why"><b>Why:</b> Shows how productized they are and where the bottlenecks/automation gaps are (HubSpot → PandaDoc → QuickBooks, 10–15 min proposals).</p>
+    </div>
+
+    <div class="qcat"><span class="tag">F · The competition → turn it into homework</span></div>
+    <div class="q">
+      <p class="ask">"Who are your competitors? Who's beating you that shouldn't be? Where are they crushing you?"</p>
+      <p class="why"><b>Why:</b> Builds the full competitive set and where they lose share of voice — your audit starting list.</p>
+    </div>
+    <div class="q">
+      <p class="ask">"Do you ever see competitor ads in your own feed?" → then give the homework:</p>
+      <p class="why"><b>The move:</b> "Start saving them — the ad <i>and</i> the landing page. Those LPs are hidden; the only way to find them is through the ad. A handful of those is a free market-research matrix — feed it to AI and pull the KPIs that make their spend work. Their A/B testing is already done for you." Valuable to them whether or not they hire you.</p>
+    </div>
+
+    <div class="qcat"><span class="tag">G · Current marketing reality &amp; moat</span></div>
+    <div class="q">
+      <p class="ask">"What do you have today — deck, brochures, video? Where do leads come from now — referral, channel, paid? What changed recently?"</p>
+      <p class="why"><b>Why:</b> Inventories the assets you can repurpose and the channels in play. "What changed" surfaces the wound that brought them to the call.</p>
+    </div>
+    <div class="q">
+      <p class="ask">"Where does IP — patents, trademarks, rights — fall in all this?"</p>
+      <p class="why"><b>Why:</b> Finds the defensible moat and the proof points worth putting front and center.</p>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section>
+    <p class="sec-label">04 · The reframe moves</p>
+    <h2>Teach while you ask.</h2>
+    <p class="sec-sub">This is the secret weapon. You don't just collect answers — you hand back a sharper version of what they said. It proves expertise and gets them confirming or correcting, which surfaces even more.</p>
+
+    <h3>Rename what they do, in your words</h3>
+    <p>Reflect their business back with a crisp frame they haven't heard: <strong>"digital shelf-space management,"</strong> <strong>"that integrator is really a glorified referral partner,"</strong> <strong>"you need a LensCrafters website objective."</strong> Every reframe earns a "yeah, exactly" (confirmation) or a "not quite" (gold).</p>
+
+    <h3>Throw a gentle challenge on the table</h3>
+    <p>Don't just agree with everything — that reads as a vendor. Push back with reasoning: <strong>"I'll throw a challenge at you — I haven't seen a webinar succeed in years. Delivering your demo to every website visitor is less work and a better output."</strong> Disagreeing well is what makes them trust the times you agree.</p>
+
+    <div class="callout">
+      <p class="eyebrow">The litmus test</p>
+      <p>By the end, they should feel like they <strong>learned more about their own business from you</strong> than they told you — and that you turned them down a path before they even asked for a proposal. That's when they start wanting your business.</p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section>
+    <p class="sec-label">05 · The close</p>
+    <h2>End so they're chasing you.</h2>
+
+    <ol class="arc">
+      <li><div class="body"><h4>Give the homework</h4><p>One concrete, valuable task they'd benefit from "whether we work together or not." It makes the value real before any contract.</p></div></li>
+      <li><div class="body"><h4>Make the honest-broker promise</h4><p>"At the end of this, if we're not a match, I'll tell you exactly why — with tangible data — and I'll tell you what I'd actually do in your shoes." This is what unlocks the guarded information.</p></div></li>
+      <li><div class="body"><h4>Hold the scarcity posture</h4><p>Spend real time on how selective you are and how booked you are. "I'm trying to earn your business — but this is about you proving we're a good fit."</p></div></li>
+      <li><div class="body"><h4>Take the raw material, set the date</h4><p>"Don't even send the deck — just send me the transcript so I can process what's really being said." Then lock a specific follow-up date before you hang up.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- QUICK REF -->
+  <section>
+    <p class="sec-label">06 · Quick reference</p>
+    <h2>Never leave a discovery call without these.</h2>
+    <p class="sec-sub">The one-pager. If you only get through this list, you got the call.</p>
+
+    <ol class="quickref">
+      <li>Who's your favorite customer — and what are they buying? (the wave-a-wand question)</li>
+      <li>Who would you keep if you raised the floor to $5M+ clients?</li>
+      <li>What names would put you on the map?</li>
+      <li>What do people <em>think</em> they want, when really they need your product?</li>
+      <li>What triggers someone to start looking for you?</li>
+      <li>What do they expect to spend vs. what they actually spend? Where do you lose?</li>
+      <li>What's your CAC, typical order size, and current order volume?</li>
+      <li>Big slow deals vs. small fast deals — walk me through each.</li>
+      <li>Packages or custom? How fast is a proposal? What's the stack?</li>
+      <li>Who are your competitors, and who's beating you that shouldn't be?</li>
+      <li>Where do leads come from today, and what changed recently?</li>
+      <li>Where do your IP / moat / proof points sit?</li>
+    </ol>
+  </section>
+
+  <footer>SGEN · Discovery Playbook · internal sales tool — not for distribution</footer>
+
+</div>
+</body>
+</html>
