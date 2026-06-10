@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Nomad Game Plan — Cards, Banking &amp; Taxes</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --warm:#F8F8F6; --ink:#1A1A1A; --muted:#6b6b6b;
+    --red:#d51522; --grad:linear-gradient(to right,#780101,#e80000,#a30000);
+    --dark:#1b1a18; --darkaccent:#ff5762;
+    --line:#e7e7e3; --green:#1f7a3d; --amber:#9a6a00; --amberbg:#fff7e6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--warm);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase}
+
+  /* ---- HERO ---- */
+  header{background:var(--dark);color:#fff;padding:64px 0 56px}
+  .logo{font-weight:800;font-size:18px;letter-spacing:.02em}
+  .logo em{color:var(--darkaccent);font-style:normal}
+  .eyebrow{font-size:11px;color:var(--darkaccent);margin:34px 0 14px;font-weight:700}
+  header h1{font-size:46px;line-height:1.05;font-weight:900;letter-spacing:-.02em;max-width:760px}
+  header h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header p.sub{color:#cfcfca;margin-top:18px;font-size:17px;max-width:680px}
+  .meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta span{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#bdbdb8;border:1px solid #3a3936;border-radius:999px;padding:6px 12px}
+
+  /* ---- SECTIONS ---- */
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .snum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--red)}
+  h2{font-size:30px;font-weight:800;letter-spacing:-.015em;margin:8px 0 6px}
+  h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{color:var(--muted);font-size:16px;max-width:760px;margin-bottom:26px}
+  h3{font-size:19px;font-weight:700;margin:30px 0 10px}
+  p{margin-bottom:14px}
+  ul{margin:0 0 14px 0;padding-left:0;list-style:none}
+  ul li{position:relative;padding-left:24px;margin-bottom:9px}
+  ul li::before{content:"";position:absolute;left:4px;top:11px;width:7px;height:7px;border-radius:2px;background:var(--grad)}
+  strong{font-weight:700}
+  a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(213,21,34,.3)}
+
+  /* ---- TLDR CARDS ---- */
+  .tldr{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+  .tcard .n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+  .tcard h4{font-size:15px;font-weight:700;margin:12px 0 6px}
+  .tcard p{font-size:13.5px;color:var(--muted);margin:0}
+
+  /* ---- CALLOUTS ---- */
+  .call{border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14.5px}
+  .warn{background:var(--amberbg);border:1px solid #f0d693;color:#5b4300}
+  .warn b{color:var(--amber)}
+  .good{background:#eef7f0;border:1px solid #bfe0c8;color:#1c4a2a}
+  .good b{color:var(--green)}
+  .call .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+
+  /* ---- TABLES ---- */
+  .tbl{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+  .tbl th{background:var(--warm);text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line)}
+  .tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td strong{color:var(--ink)}
+  .win{color:var(--green);font-weight:700}
+  .lose{color:var(--red);font-weight:700}
+
+  /* ---- CHECKLIST ---- */
+  .steps{counter-reset:step;margin-top:8px}
+  .step{display:flex;gap:16px;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .num{counter-increment:step;flex:0 0 34px;height:34px;border-radius:50%;background:var(--grad);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step .num::before{content:counter(step)}
+  .step .body{flex:1}
+  .step .body b{display:block;font-size:15.5px;margin-bottom:2px}
+  .step .body span{color:var(--muted);font-size:14px}
+
+  /* ---- DARK CLOSE ---- */
+  .close{background:var(--dark);color:#fff;border:none}
+  .close h2{color:#fff}
+  .close .lead{color:#cfcfca}
+  .pro{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .pro .p{background:#262522;border:1px solid #3a3936;border-radius:12px;padding:20px}
+  .pro .p .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--darkaccent);text-transform:uppercase;letter-spacing:.06em}
+  .pro .p h4{font-size:17px;margin:8px 0 6px;color:#fff}
+  .pro .p p{font-size:13.5px;color:#bdbdb8;margin:0}
+  .disclaim{margin-top:30px;font-size:12.5px;color:#9a998f;border-top:1px solid #3a3936;padding-top:18px}
+
+  /* ---- OPEN ITEMS ---- */
+  .qbox{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:0 12px 12px 0;padding:18px 20px;margin-top:10px}
+  .qbox ul li::before{background:var(--red)}
+
+  footer{background:var(--warm);padding:30px 0 50px;color:var(--muted);font-size:12.5px;text-align:center}
+
+  @media (max-width:720px){
+    header h1{font-size:32px}
+    .tldr{grid-template-columns:1fr}
+    .pro{grid-template-columns:1fr}
+    h2{font-size:24px}
+  }
+  @media print{
+    body{background:#fff}
+    section{break-inside:avoid;border-bottom:1px solid #ddd}
+    header,.close{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">S<em>G</em>EN</div>
+    <div class="eyebrow mono">Field Guide · Updated June 2026</div>
+    <h1>The <span class="hl">Digital Nomad</span> Game Plan: Cards, Banking &amp; Taxes</h1>
+    <p class="sub">A sequenced playbook for a US citizen going remote and living abroad — built to protect your income from unnecessary tax and fees, earn travel rewards, and turn a remote salary into real savings. Written around a Bali / SE Asia base, but the framework travels.</p>
+    <div class="meta">
+      <span>US Citizen</span>
+      <span>No-income-tax state domicile</span>
+      <span>Remote income via own LLC</span>
+      <span>Bali → SE Asia</span>
+    </div>
+  </div>
+</header>
+
+<!-- TLDR -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">01 / The Big Picture</div>
+    <h2>Three things that move the <span class="g">most money</span></h2>
+    <p class="lead">Get these right and everything else is detail. Two of them are counterintuitive — the usual internet advice (and most YouTube videos) will steer you wrong.</p>
+    <div class="tldr">
+      <div class="tcard">
+        <div class="n">01</div>
+        <h4>Keep a solo LLC plain — don't rush to S-corp</h4>
+        <p>Below ~$80–100k profit, S-corp's small savings get eaten by ~$2.5k/yr in filing costs — a net loss. "More write-offs" is a myth; you already get them. Revisit near ~$100k.</p>
+      </div>
+      <div class="tcard">
+        <div class="n">02</div>
+        <h4>Bali is not tax-free</h4>
+        <p>The nomad visa likely makes you an Indonesian tax resident — possibly from day one. "Nomad visa = no tax" is false. Real, unsettled exposure.</p>
+      </div>
+      <div class="tcard">
+        <div class="n">03</div>
+        <h4>Set up everything before you fly</h4>
+        <p>US banks and credit cards need a US address and your physical presence. Once you're abroad, opening them gets hard or impossible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAXES -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">02 / Taxes</div>
+    <h2>The <span class="g">tax</span> plan</h2>
+    <p class="lead">This is where the nomad videos go quiet — most don't cover US-citizen taxes at all, and the popular "0% tax via a Dubai company" play is built for non-Americans. The US taxes citizens on worldwide income no matter where they live. Here's what actually applies.</p>
+
+    <div class="call good">
+      <span class="tag">A useful baseline</span>
+      <b>A one-time gift is tax-free to the person receiving it.</b> Gifts aren't income to the recipient, and a gift from a US person needs no reporting form. (A gift over $100k from a <em>foreign</em> person needs an information form, but still isn't taxed.) Handy if a windfall is seeding your move.
+    </div>
+
+    <h3>The break you'll live on: the Foreign Earned Income Exclusion (FEIE)</h3>
+    <ul>
+      <li>As a US citizen working abroad, you can exclude up to <strong>$130,000 (2025) / $132,900 (2026)</strong> of your earned income from US <em>income</em> tax.</li>
+      <li>To qualify in year one as a country-hopper, you use the <strong>Physical Presence Test: 330 full days outside the US</strong> in a 12-month window. Track every day — including travel days and any trips home. A couple of careless US visits can blow it.</li>
+      <li>Income for work physically done overseas qualifies — it doesn't matter that you own the company that pays you, or that the company is based in the US.</li>
+      <li><strong>You still file a return every year</strong>, even when the exclusion zeroes your income tax. The exclusion only exists if you claim it. Expat deadline auto-extends to <strong>June 15</strong> (then Oct 15 on request).</li>
+    </ul>
+
+    <h3>The catch the videos skipped: the FEIE does <em>not</em> erase payroll tax</h3>
+    <p>Social Security + Medicare (~15.3%) still applies to your earned income — a cost you'll owe no matter what. The FEIE only touches income tax. This is the whole reason the S-corp question matters — and why, at lower incomes, the answer is still <em>don't bother</em>.</p>
+
+    <h3>The S-corp question: <span style="color:var(--red)">stay a plain LLC until you're bigger</span></h3>
+    <p>A common pitch from accountants is "elect S-corp to save on payroll tax." It's right at higher incomes — but two things sink it for a solo earner under ~$80–100k profit:</p>
+    <ul>
+      <li><strong>The "more write-offs" pitch is a myth.</strong> A plain LLC (sole proprietor) already deducts <em>every</em> business expense an S-corp would. S-corp unlocks <strong>zero</strong> extra write-offs — its only edge is dodging the ~15.3% payroll tax on the slice you take as a "distribution."</li>
+      <li><strong>At lower incomes that slice is too small to beat the overhead.</strong> Running an S-corp costs ~<strong>$2,000–$4,500/yr</strong> (payroll service + a separate business tax return + bookkeeping). The savings don't clear that cost.</li>
+    </ul>
+
+    <p style="margin-bottom:8px"><strong>Illustrative example, ~$70k profit (salary ~$48k / distribution ~$22k, 2025 single filer — approximate):</strong></p>
+    <table class="tbl">
+      <thead>
+        <tr><th>Scenario</th><th>Plain LLC</th><th>S-corp <span style="text-transform:none;letter-spacing:0">(after ~$2.5k filing costs)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Living abroad (FEIE)</strong></td><td class="win">~$9,900 total tax · ✓ simpler &amp; cheaper</td><td class="lose">~$8,800 tax, but −$2,500 costs = net <b>~$1,000–1,500/yr worse</b></td></tr>
+        <tr><td><strong>Domestic (no FEIE)</strong></td><td class="win">~$13,800 total tax · ✓</td><td class="lose">~$12,500 tax, but −$2,500 costs = net <b>~$1,200/yr worse</b></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13.5px;color:var(--muted)">Abroad, the FEIE already drops income tax to <strong>$0</strong> for a plain LLC — so S-corp only buys payroll savings, which are smaller than the cost of running it. And a quirk called the <strong>stacking rule</strong> taxes an S-corp distribution on top of the excluded salary, adding income tax a plain LLC never pays. <em>Approximations based on 2025 single-filer brackets; verified against IRS (FEIE, Form 2555) and CPA break-even guidance.</em></p>
+
+    <div class="call good">
+      <span class="tag">Bonus — a solo LLC owner skips the W-2</span>
+      As a plain single-member LLC you <b>don't pay yourself a W-2 salary at all</b> — you take <b>owner's draws</b> and pay <b>quarterly estimated taxes</b> on the full profit. A W-2-to-yourself only exists in the S-corp world. One less thing to set up.
+    </div>
+
+    <div class="call warn">
+      <span class="tag">When S-corp flips to worth it</span>
+      It becomes worthwhile around <b>~$80k</b> profit domestically, and <b>~$100k+</b> once you're abroad on the FEIE (the exclusion already zeroes income tax, so S-corp's payroll savings must beat both the filing costs <em>and</em> the new tax it creates on distributions). Below that: <b>do nothing — no Form 2553, no payroll. And have any accountant model S-corp with the FEIE included</b> — a domestic-only analysis overstates the benefit.
+    </div>
+
+    <h3>The Bali tax exposure — read this twice</h3>
+    <div class="call warn">
+      <span class="tag">Real, unsettled risk</span>
+      The official <b>E33G Remote Worker Visa</b> very likely makes you an <b>Indonesian tax resident from arrival, not at day 183</b>. Indonesian residents are taxed on <b>worldwide income at 5–35%</b>, and the "4-year foreign-income exemption" you may have heard about <b>does not apply to E33G holders</b>. A US–Indonesia tax treaty prevents true double taxation, but relief isn't automatic. The E33G requires ~$60k/yr income proof and is the clean legal path — but handle the tax side with an advisor. <b>Get a paid cross-border consult before committing to a full year.</b>
+    </div>
+
+    <h3>The "fly under the radar" tourist-visa route — two different radars</h3>
+    <p><strong>The US radar you can't hide from — but you don't need to.</strong> Your employer being in the US does <em>not</em> make your income US-taxable. What matters is <strong>where you physically do the work</strong>: working from Bali makes it "foreign earned income," so the FEIE legally wipes out your US income tax <strong>regardless of which visa you hold</strong>. Claim it openly — the IRS doesn't report your visa to Indonesia. You get the break either way.</p>
+    <div class="call warn">
+      <span class="tag">The Indonesia radar — the real one, and it's tightening</span>
+      <ul style="margin:0">
+        <li><b>C1 is a tourist visa: 60 days, extendable to 180 max (~6 months)</b> — it can't legally cover a year and doesn't permit work.</li>
+        <li>Stretching a year means <b>visa runs</b>, now caught by <b>facial-recognition autogates</b> (≈ flagged by the 3rd consecutive reset).</li>
+        <li>The crackdown is real: <b>~2,600 foreigners deported from Bali in Jan–Jul 2025</b>, plus a dedicated immigration task force since April 2026. Penalties run to deportation + a <b>1–10 year blacklist</b>.</li>
+        <li><b>It doesn't even dodge the tax:</b> staying &gt;183 days makes you a tax resident <em>regardless of visa</em> — so "under the radar" = non-compliance, not a legal exemption.</li>
+      </ul>
+      <div style="margin-top:8px"><b>Honest read:</b> cheaper and lighter only <em>if nothing goes wrong</em>; can't cleanly cover a year; rising enforcement. The E33G is the durable path for a full year.</div>
+    </div>
+
+    <h3>Keep your domicile clean &amp; the housekeeping</h3>
+    <ul>
+      <li><strong>Hold a no-income-tax domicile</strong> (Nevada, Florida, Texas, etc.): keep a driver's license, voter registration, vehicle registration, and a real residential address there. Sever ties to any prior taxing state. A virtual mailbox alone is <em>not</em> proof of domicile.</li>
+      <li><strong>FBAR:</strong> if all your foreign accounts <em>combined</em> ever top <strong>$10,000</strong> in a year, you file a free, simple report (Wise/Revolut balances may count — track them). The bigger FATCA form only kicks in at $200k+ for someone living abroad.</li>
+      <li><strong>Foreign housing exclusion:</strong> exists, but SE-Asia rents are usually too low to clear the threshold — effectively zero benefit there. It matters in expensive cities.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BANKING -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">03 / Banking</div>
+    <h2>Your <span class="g">banking</span> stack</h2>
+    <p class="lead">The nomad consensus — across videos and articles — is a US-anchored, layered setup. Not a foreign bank.</p>
+    <table class="tbl">
+      <thead>
+        <tr><th>Layer</th><th>Use</th><th>Why it wins</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Charles Schwab</strong><br>High-Yield Investor Checking</td><td>Cash / ATM anchor</td><td>Reimburses <strong>ATM fees worldwide, unlimited</strong>; no foreign-transaction fees. The most-recommended product across every source. Comes with a free brokerage.</td></tr>
+        <tr><td><strong>Wise</strong><br>Multi-currency account</td><td>Holding &amp; spending local currency</td><td>Hold/convert 40+ currencies at the real exchange rate; cheap local spending. The one product <em>every</em> source recommends.</td></tr>
+        <tr><td><strong>Fidelity</strong><br>Cash Management (or a 2nd bank)</td><td>Backup checking</td><td>Redundancy — if one account freezes while you're abroad, you're not stranded. Also refunds ATM fees worldwide.</td></tr>
+        <tr><td><strong>Revolut</strong><br>(optional)</td><td>Daily-spend app + perks</td><td>Good app, travel perks — but sources warn it can <strong>freeze accounts first, ask later</strong>. Don't keep your main money here.</td></tr>
+      </tbody>
+    </table>
+    <div class="call warn">
+      <span class="tag">Execution notes that matter</span>
+      <ul style="margin:0">
+        <li><b>Open Schwab + Fidelity while you're physically in the US</b>, with your home-state address on file. Schwab can <em>close</em> accounts with no US address. Don't use a mail-forwarding service as your address — banks increasingly flag those.</li>
+        <li><b>Don't rely on Wise to refund ATM fees</b> — that's Schwab's job. Wise gives ~2 free withdrawals/month, then charges. So: <b>Schwab card = pull cash; Wise = hold, convert, spend.</b></li>
+        <li><b>On the ground in Bali:</b> skip a local bank account. Use <b>BCA / BNI / Mandiri</b> ATMs (BCA is the gold standard), withdraw the max (~$184/transaction), and <b>always choose to be charged in rupiah (IDR), never USD.</b> Bali is still cash-heavy — keep cash for warungs, scooters, markets.</li>
+      </ul>
+    </div>
+
+    <div class="call good">
+      <span class="tag">Don't close anything before you go</span>
+      <b>Keep your existing US bank accounts open</b> — you generally can't reopen them from overseas. Leave your current bank as the <b>income-landing + bill-pay + backup hub</b> (just confirm your home-state address is on file). Don't <em>spend</em> abroad on a card that charges foreign fees — that's Schwab/Wise's job. You're <b>adding</b> Schwab + Wise alongside your bank, not replacing it.
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">04 / Credit Cards &amp; Perks</div>
+    <h2>Cards, points &amp; <span class="g">lounges</span></h2>
+    <p class="lead">If you have a thin credit file (one card, a year or two of history) and want lounges from the start, the key question is: <strong>do your cards stack?</strong> The honest answer drives the pick below.</p>
+
+    <div class="call warn">
+      <span class="tag">"Stacking" — what it actually means</span>
+      Two strong cards from different banks (say, Chase Sapphire Preferred + Capital One Venture X) both earn rewards, but they're <b>two different point currencies that can't be combined</b> — so they don't truly "stack." A real stack = cards that <b>pool into one bank of points.</b> So pick a lane:
+    </div>
+
+    <h3>A clean starter stack — all-Capital One (lounges + one pooled currency)</h3>
+    <table class="tbl">
+      <thead><tr><th>Card</th><th>Role</th><th>Key facts</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Capital One Venture X</strong><br>$395/yr</td><td>Premium — lounges from day one</td><td><strong>Priority Pass + Cap One lounges</strong>; a <strong>$300 travel credit + 10k anniversary miles roughly cancel the fee</strong>; 2x on everything; no foreign-transaction fee.</td></tr>
+        <tr><td><strong>Capital One Savor</strong><br>$0/yr</td><td>Everyday earner that pools</td><td>No annual fee; 3% on dining &amp; groceries; no foreign fee. Earns the <strong>same miles as Venture X → one combined pool.</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13.5px;color:var(--muted)"><strong>Why this lane:</strong> lounges day one, both cards pool into a single mile bank, near-zero net annual cost once you travel, and Capital One is the friendliest premium issuer for a thin file. The all-Chase alternative (Sapphire Preferred + no-fee Freedom Unlimited) has <em>better airline transfer partners</em> but <strong>no affordable lounge card</strong> (Chase's is now $795) — so it loses the "lounges now" goal.</p>
+
+    <div class="call warn">
+      <span class="tag">Rules to obey</span>
+      <ul style="margin:0">
+        <li><b>Thin-file reality:</b> a premium card is a reach on one year of history. <b>Check Capital One's pre-approval first (no credit hit).</b> If it's a no, get the no-fee <b>Savor now</b> to build, and reapply for Venture X in 6–12 months.</li>
+        <li><b>Don't close your oldest card.</b> It's the foundation of your credit history — closing it shortens your file and dings your score right when you're building. Keep it open, use it occasionally.</li>
+        <li><b>Pay every statement in full.</b> Goal is points + a thicker file, not debt. Carrying no balance keeps reported "utilization" low, which builds your score faster.</li>
+        <li><b>Use upfront moving spend</b> (gear, flights, deposits) <b>to clear sign-up bonuses</b> — points on money you were spending anyway. Split it across each card's ~3-month window.</li>
+        <li><b>Carry a Visa/Mastercard always</b> — Amex acceptance is weak across Bali/SE Asia.</li>
+      </ul>
+    </div>
+
+    <h3>Later (6–18 months), once your file grows</h3>
+    <ul>
+      <li>Add a <strong>business card</strong> (your LLC qualifies you) if you want into another ecosystem with better transfer partners. Watch <strong>Chase's 5/24 rule</strong>: it denies you if you've opened 5+ cards in 24 months.</li>
+      <li>Grab <strong>Global Entry / TSA PreCheck</strong> — it's usually credited by your travel card and speeds every US re-entry.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- THE WINDFALL -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">05 / A Windfall</div>
+    <h2>Turning a windfall into a <span class="g">bedrock</span></h2>
+    <p class="lead">A simple framework — not licensed investment advice, but the boring, standard answer that works.</p>
+    <ul>
+      <li><strong>Keep ~6 months of expenses liquid.</strong> In Bali that's cheap — comfortable living runs <strong>~$1,600–2,400/mo</strong>, lean <strong>~$900–1,500/mo</strong> — so a real emergency fund is only ~$10–15k.</li>
+      <li><strong>Invest the rest</strong> through the brokerage that comes free with a Schwab account — low-cost, broad index funds. No extra accounts to open.</li>
+      <li><strong>Your real wealth engine is your savings rate.</strong> US salary + Bali costs means you can bank a large share of your income every month. That monthly surplus, invested, will dwarf any one-time windfall. Protecting it from unnecessary tax (plain LLC + FEIE) and fees (the banking stack) is the whole game.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section>
+  <div class="wrap">
+    <div class="snum mono">06 / Do This Before You Fly</div>
+    <h2>The <span class="g">pre-flight</span> checklist</h2>
+    <p class="lead">Order matters. Most of this is only easy while you're still in the US.</p>
+    <div class="steps">
+      <div class="step"><div class="num"></div><div class="body"><b>Lock a no-income-tax domicile</b><span>Driver's license, voter registration, vehicle registration, a real residential address. Confirm your LLC's registration points there too.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Open Schwab + Fidelity</b><span>In the US, with your home-state address on file. Move your cash into Schwab and set up the brokerage.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Set up Wise</b><span>Order the card while you still have a US address.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Apply for your card stack</b><span>Check pre-approval first (no credit hit). While you have a US address + presence. Plan your moving spend to clear the bonuses. Keep your old card open.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Get Global Entry / TSA PreCheck</b><span>Often credited by your travel card; speeds US re-entries.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Apply for the E33G Remote Worker Visa</b><span>Needs ~$60k/yr income proof + ~$2k savings; 1 year; foreign employer only; ~$600–900 all-in. Note: not renewable in-country — you exit and reapply for year two.</span></div></div>
+      <div class="step"><div class="num"></div><div class="body"><b>Book the two consults below</b><span>Before you commit to a full year abroad. This is the cheap insurance on everything above.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROS / CLOSE -->
+<section class="close">
+  <div class="wrap">
+    <div class="snum mono" style="color:var(--darkaccent)">07 / Get These Two Pros</div>
+    <h2>Two experts worth paying for</h2>
+    <p class="lead">This is where the videos and blogs run out. One session each will likely pay for itself many times over.</p>
+    <div class="pro">
+      <div class="p">
+        <span class="tag">US side</span>
+        <h4>Cross-border expat CPA</h4>
+        <p>Have them model S-corp <em>with the FEIE included</em> (a domestic-only view overstates it), confirm the plain-LLC call, and pressure-test the host-country residency question. Names that come up repeatedly: Greenback, Bright!Tax, MyExpatTaxes.</p>
+      </div>
+      <div class="p">
+        <span class="tag">Destination side</span>
+        <h4>Local visa / tax advisor</h4>
+        <p>Get a straight answer on the "tax resident from day one" exposure on the E33G before committing to a full year. Firms like Emerhub specialize in exactly this for Indonesia.</p>
+      </div>
+    </div>
+    <div class="disclaim">
+      A research-based planning guide, not formal tax, legal, or investment advice. Dollar figures use 2025 single-filer brackets and are approximations based on a representative ~$70k example; the S-corp break-even (~$80k domestic / ~$100k expat) is an estimate. Tax findings drawn from IRS.gov (FEIE, Form 2555) and expat-CPA firms (Greenback, Bright!Tax, McGowin, OnlineTaxman) plus CPA break-even guidance. Visa/residency/enforcement findings drawn from PwC Worldwide Tax Summaries and Indonesia immigration sources current to June 2026 — rules are in flux; confirm before relying. Sign off the S-corp question, host-country residency, and visa route with the professionals above.
+    </div>
+  </div>
+</section>
+
+<!-- KEY DECISIONS -->
+<section style="background:var(--warm)">
+  <div class="wrap">
+    <div class="snum mono">08 / Key Decisions</div>
+    <h2>The calls only <span class="g">you</span> can make</h2>
+    <div class="qbox">
+      <ul>
+        <li><strong>Structure:</strong> stay a plain LLC while profit is under ~$80–100k; revisit S-corp as income climbs — and model it <em>with</em> the FEIE, not domestic-only.</li>
+        <li><strong>Visa route:</strong> the legal E33G (tax-resident from day one, ~$60k income test) vs. the cheaper tourist-visa route (can't cleanly cover a year, rising enforcement, doesn't dodge tax). The durable choice is the E33G — but it's a personal risk/cost tradeoff.</li>
+        <li><strong>Card lane:</strong> lounges-now (Capital One) vs. best point value (Chase). Pick one and pool within it; don't split across both early.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">S<strong style="color:var(--red)">G</strong>EN · Digital Nomad Game Plan · General Guide · June 2026</div>
+</footer>
+
+</body>
+</html>
